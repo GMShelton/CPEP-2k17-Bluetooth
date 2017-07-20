@@ -88,7 +88,7 @@ digitalWrite(3,HIGH);
 digitalWrite(4,HIGH);
 digitalWrite(12,LOW);
 digitalWrite(9,LOW);
-
+//I think it's all good now, just changed where 4 and 5 where on case 5 and 6.
 break;
 case 6: // Stop
 digitalWrite(12,HIGH);
