@@ -69,6 +69,8 @@ digitalWrite(12,LOW);
 digitalWrite(9,LOW);
 digitalWrite(5,LOW);
 break;
+case 4: // Turn Left
+=======
 case 5: // Turn Left 
 digitalWrite(8,HIGH);
 digitalWrite(7,LOW);
@@ -78,11 +80,20 @@ digitalWrite(9,HIGH);
 digitalWrite(12,LOW);
 digitalWrite(5,LOW);
 break;
-case 4: // Turn Right? Its 1:10 AM and I just want to celebrate my realtive sucess and not fix
+case 5: // Turn Right? Its 1:10 AM and I just want to celebrate my realtive sucess and not fix
+=======
+case 4: // Turn Right? Its 1:10 AM and I just want to celebrate my realtive sucess and not fi
 //all the problems so Tomorrow. I think right now the LEft will turn right and the Right will turn left.
 //I'll confim this is a minute but not fix it. I'll fix it tomorrow
 digitalWrite(8,LOW);
 digitalWrite(7,HIGH);
+digitalWrite(5,LOW);
+digitalWrite(3,HIGH);
+digitalWrite(4,HIGH);
+digitalWrite(12,LOW);
+digitalWrite(9,LOW);
+//I think it's all good now, just changed where 4 and 5 where on case 5 and 6.
+=======
 digitalWrite(4,LOW);
 digitalWrite(3,HIGH);
 digitalWrite(5,HIGH);
@@ -95,10 +106,15 @@ digitalWrite(12,HIGH);
 digitalWrite(9,LOW);
 digitalWrite(8,LOW);
 digitalWrite(7,LOW);
-analogWrite(6,LOW);
+analogWrite(6,LOW)
+digitalWrite(5,LOW);
+digitalWrite(3,LOW);
+digitalWrite(4,LOW);
+=======
 digitalWrite(4,LOW);
 digitalWrite(3,LOW);
 digitalWrite(5,LOW);
+
 
 break;
 default: break; // do nothing
