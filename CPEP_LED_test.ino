@@ -12,6 +12,7 @@
 int Speed = 125;  //Defines the speed of the robot
 byte cmd; // Stores the next byte of incoming data, which is a "command" to do something
 byte param; // Stores the 2nd byte, which is the command parameter
+byte speedParam // Stores 3rd byte for speed
 
 void setup() {
   // put your setup code here, to run once:
@@ -30,14 +31,14 @@ Serial.begin(9600);// Serial (BLuetooth) Communication
 }
 
 void loop() {
-  while(param == 7){
+  while(speedParam == 7){
     while(Speed <= 255){
       Speed == Speed += 1
       delay(200) 
     }
   }
 
-  while(param == 8){
+  while(speedParam == 8){
     while(Speed > 0){
       Speed == Speed -= 1
       delay(200)
