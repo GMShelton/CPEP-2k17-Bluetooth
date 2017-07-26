@@ -12,7 +12,7 @@
 int Speed = 125;  //Defines the speed of the robot
 byte cmd; // Stores the next byte of incoming data, which is a "command" to do something
 byte param; // Stores the 2nd byte, which is the command parameter
-byte speedParam // Stores 3rd byte for speed
+byte speedParam; // Stores 3rd byte for speed
 
 void setup() {
   // put your setup code here, to run once:
@@ -29,20 +29,19 @@ pinMode(4,OUTPUT);//Motor R Back
 pinMode(3,OUTPUT);//Motor R Forward
 Serial.begin(9600);// Serial (BLuetooth) Communication
 }
-
 void loop() {
   while(speedParam == 7){
     while(Speed <= 255){
-      Speed == Speed += 1
-      delay(200) 
-    }
+      Speed = (1 + Speed);
+      delay(200);
+    } //When the Arudino receives a third byte with the value 7, and while speed is less than or equal to 255, increase the speed of the robot every .2 seconds.
   }
 
   while(speedParam == 8){
     while(Speed > 0){
-      Speed == Speed -= 1
-      delay(200)
-    }
+      Speed = (1 - Speed);
+      delay(200);
+    } //When the Arduino receives a third byte with the value 8, and while speed is greater than zero, decrease the speed of the robot every .2 seconds.
   }
   
 if ( Serial.available() ) // if data is available to read
@@ -127,3 +126,4 @@ default: break; // do nothing
 delay(READ_RATE); // wait 100ms for next readin
 
 }
+
