@@ -89,9 +89,9 @@ digitalWrite(9,HIGH);
 digitalWrite(12,LOW);
 digitalWrite(5,LOW);
 break;
-case 5: // Turn Right? Its 1:10 AM and I just want to celebrate my realtive sucess and not fix
-//all the problems so Tomorrow. I think right now the LEft will turn right and the Right will turn left.
-//I'll confim this is a minute but not fix it. I'll fix it tomorrow
+case 5: // Turn Right? Its 1:10 AM and I just want to celebrate my relative success and not fix
+//all the problems so Tomorrow. I think right now the Left will turn right and the Right will turn left.
+//I'll confirm this is a minute but not fix it. I'll fix it tomorrow
 digitalWrite(8,LOW);
 digitalWrite(7,HIGH);
 digitalWrite(4,LOW);
@@ -110,58 +110,36 @@ analogWrite(6,LOW);
 digitalWrite(4,LOW);
 digitalWrite(3,LOW);
 digitalWrite(5,LOW);
-
+    
+    
 break;
- while(speedParam == 7){
+    case 7:
+    while(speedParam == 7){
     while(Speed <= 255){
       Speed = (Speed + 1);
       Serial.write(Speed);
       delay(200);
-    } //When the Arudino receives a third byte with the value 7, and while speed is less than or equal to 255, increase the speed of the robot every .2 seconds.
-  }
-
-  while(speedParam == 8){
+    } //When the Arudino receives a third byte with the value 7, and while speed is less than or equal to 255, 
+   //increase the speed of the robot every .2 seconds.
+    break;
+  case 8:
+    while(speedParam == 8){
     while(Speed >= 0){
       Speed = (Speed - 1) ;
       Serial.write(Speed);
       delay(200);
-    } //When the Arduino receives a third byte with the value 8, and while speed is greater than zero, decrease the speed of the robot every .2 seconds.
-  }
+    } //When the Arduino receives a third byte with the value 8, and while speed is greater than zero, 
+    //decrease the speed of the robot every .2 seconds.
+    break;
 
-  while(0 < Speed < 75){
-    digitalWrite(whiteLED, HIGH);
-    digitalWrite(greenLED, LOW);
-    digitalWrite(blueLED, LOW);
-    digitalWrite(redLED, LOW);
-  }
-
-  while(76 < Speed < 150){
-    digitalWrite(whiteLED, LOW);
-    digitalWrite(greenLED, HIGH);
-    digitalWrite(blueLED, LOW);
-    digitalWrite(redLED, LOW);
-  }
-
-  while(151 < Speed < 225){
-    digitalWrite(whiteLED, LOW);
-    digitalWrite(greenLED, LOW);
-    digitalWrite(blueLED, HIGH);
-    digitalWrite(redLED, LOW);
-  }
-
-  while(226 < Speed < 255){
-    digitalWrite(whiteLED, LOW);
-    digitalWrite(greenLED, LOW);
-    digitalWrite(blueLED, LOW);
-    digitalWrite(redLED, HIGH);
-  }
+  
 default: break; // do nothing
 } // switch (param)
 } // switch (cmd) case 1
 default: break; // do nothing
 } // switch (cmd)
 
-delay(READ_RATE); // wait 100ms for next readin
+delay(READ_RATE); // wait 100ms for next reading
 
 }
 
