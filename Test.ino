@@ -6,6 +6,11 @@
 #define sw_serial_rx_pin 11 //  Connect this pin to TX on the HC - 06
 #define sw_serial_tx_pin 10 //  Connect this pin to RX on the HC - 06
 
+#define whiteLED 2
+#define greenLED 6
+#define blueLED 10
+#define redLED 11
+
 #define READ_RATE 100 // How often the serial link is read, in milliseconds
 #define FLASH_RATE 100 // The on/off period in milliseconds, for the LED Flash status feedback
 
@@ -42,6 +47,34 @@ void loop() {
       Speed -= 1;
       delay(200);
     } //When the Arduino receives a third byte with the value 8, and while speed is greater than zero, decrease the speed of the robot every .2 seconds.
+  }
+
+  while(0 < Speed < 75){
+    digitalWrite(whiteLED, HIGH);
+    digitalWrite(greenLED, LOW);
+    digitalWrite(blueLED, LOW);
+    digitalWrite(redLED, LOW);
+  }
+
+  while(76 < Speed < 150){
+    digitalWrite(whiteLED, LOW);
+    digitalWrite(greenLED, HIGH);
+    digitalWrite(blueLED, LOW);
+    digitalWrite(redLED, LOW);
+  }
+
+  while(151 < Speed < 225){
+    digitalWrite(whiteLED, LOW);
+    digitalWrite(greenLED, LOW);
+    digitalWrite(blueLED, HIGH);
+    digitalWrite(redLED, LOW);
+  }
+
+  while(226 < Speed < 255){
+    digitalWrite(whiteLED, LOW);
+    digitalWrite(greenLED, LOW);
+    digitalWrite(blueLED, LOW);
+    digitalWrite(redLED, HIGH);
   }
   
 if ( Serial.available() ) // if data is available to read
