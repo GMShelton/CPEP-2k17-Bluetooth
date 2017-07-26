@@ -15,6 +15,7 @@
 #define FLASH_RATE 100 // The on/off period in milliseconds, for the LED Flash status feedback
 
 
+int Speed = 125;  //Defines the speed of the robot 
 byte cmd; // Stores the next byte of incoming data, which is a "command" to do something
 byte param; // Stores the 2nd byte, which is the command parameter
 byte speedParam; // Stores 3rd byte for speed
@@ -35,51 +36,8 @@ pinMode(4,OUTPUT);//Motor R Back
 pinMode(3,OUTPUT);//Motor R Forward
 Serial.begin(9600);// Serial (BLuetooth) Communication
 }
-void loop() {
-int Speed = 125;  //Defines the speed of the robot  
-  while(speedParam == 7){
-    while(Speed <= 255){
-      Speed += 1;
-      Serial.write(Speed);
-      delay(200);
-    } //When the Arudino receives a third byte with the value 7, and while speed is less than or equal to 255, increase the speed of the robot every .2 seconds.
-  }
-
-  while(speedParam == 8){
-    while(Speed > 0){
-      Speed -= 1;
-      Serial.write(Speed);
-      delay(200);
-    } //When the Arduino receives a third byte with the value 8, and while speed is greater than zero, decrease the speed of the robot every .2 seconds.
-  }
-
-  while(0 < Speed < 75){
-    digitalWrite(whiteLED, HIGH);
-    digitalWrite(greenLED, LOW);
-    digitalWrite(blueLED, LOW);
-    digitalWrite(redLED, LOW);
-  }
-
-  while(76 < Speed < 150){
-    digitalWrite(whiteLED, LOW);
-    digitalWrite(greenLED, HIGH);
-    digitalWrite(blueLED, LOW);
-    digitalWrite(redLED, LOW);
-  }
-
-  while(151 < Speed < 225){
-    digitalWrite(whiteLED, LOW);
-    digitalWrite(greenLED, LOW);
-    digitalWrite(blueLED, HIGH);
-    digitalWrite(redLED, LOW);
-  }
-
-  while(226 < Speed < 255){
-    digitalWrite(whiteLED, LOW);
-    digitalWrite(greenLED, LOW);
-    digitalWrite(blueLED, LOW);
-    digitalWrite(redLED, HIGH);
-  }
+void loop() { 
+ 
   
 if ( Serial.available() ) // if data is available to read
 {
@@ -154,6 +112,49 @@ digitalWrite(3,LOW);
 digitalWrite(5,LOW);
 
 break;
+ while(speedParam == 7){
+    while(Speed <= 255){
+      Speed = (Speed + 1);
+      Serial.write(Speed);
+      delay(200);
+    } //When the Arudino receives a third byte with the value 7, and while speed is less than or equal to 255, increase the speed of the robot every .2 seconds.
+  }
+
+  while(speedParam == 8){
+    while(Speed >= 0){
+      Speed = (Speed - 1) ;
+      Serial.write(Speed);
+      delay(200);
+    } //When the Arduino receives a third byte with the value 8, and while speed is greater than zero, decrease the speed of the robot every .2 seconds.
+  }
+
+  while(0 < Speed < 75){
+    digitalWrite(whiteLED, HIGH);
+    digitalWrite(greenLED, LOW);
+    digitalWrite(blueLED, LOW);
+    digitalWrite(redLED, LOW);
+  }
+
+  while(76 < Speed < 150){
+    digitalWrite(whiteLED, LOW);
+    digitalWrite(greenLED, HIGH);
+    digitalWrite(blueLED, LOW);
+    digitalWrite(redLED, LOW);
+  }
+
+  while(151 < Speed < 225){
+    digitalWrite(whiteLED, LOW);
+    digitalWrite(greenLED, LOW);
+    digitalWrite(blueLED, HIGH);
+    digitalWrite(redLED, LOW);
+  }
+
+  while(226 < Speed < 255){
+    digitalWrite(whiteLED, LOW);
+    digitalWrite(greenLED, LOW);
+    digitalWrite(blueLED, LOW);
+    digitalWrite(redLED, HIGH);
+  }
 default: break; // do nothing
 } // switch (param)
 } // switch (cmd) case 1
