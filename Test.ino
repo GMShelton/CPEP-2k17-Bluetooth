@@ -1,10 +1,7 @@
-// Changing that Tx and Rx
-#include <SoftwareSerial.h> // to use pin 10 and 11 as RX and TX ports
 
 
 
-#define sw_serial_rx_pin 11 //  Connect this pin to TX on the HC - 06
-#define sw_serial_tx_pin 10 //  Connect this pin to RX on the HC - 06
+
 
 #define whiteLED 2
 #define greenLED 6
@@ -36,54 +33,11 @@ pinMode(6,OUTPUT);// PWN/speed controll
 pinMode(5,OUTPUT);//Turn R
 pinMode(4,OUTPUT);//Motor R Back
 pinMode(3,OUTPUT);//Motor R Forward
+pinMode(2,OUTPUT);
 Serial.begin(9600);// Serial (BLuetooth) Communication
 }
 
 void loop() {
-  Serial.write(Speed);
-  while(speedParam == 7){
-    while(Speed <= 255){
-      Speed += 1;
-      Serial.write(Speed);
-      delay(200);
-    } //When the Arudino receives a third byte with the value 7, and while speed is less than or equal to 255, increase the speed of the robot every .2 seconds.
-  }
-
-  while(speedParam == 8){
-    while(Speed > 0){
-      Speed -= 1;
-      Serial.write(Speed);
-      delay(200);
-    } //When the Arduino receives a third byte with the value 8, and while speed is greater than zero, decrease the speed of the robot every .2 seconds.
-  }
-
-  while(0 < Speed < 75){
-    digitalWrite(whiteLED, HIGH);
-    digitalWrite(greenLED, LOW);
-    digitalWrite(blueLED, LOW);
-    digitalWrite(redLED, LOW);
-  }
-
-  while(76 < Speed < 150){
-    digitalWrite(whiteLED, LOW);
-    digitalWrite(greenLED, HIGH);
-    digitalWrite(blueLED, LOW);
-    digitalWrite(redLED, LOW);
-  }
-
-  while(151 < Speed < 225){
-    digitalWrite(whiteLED, LOW);
-    digitalWrite(greenLED, LOW);
-    digitalWrite(blueLED, HIGH);
-    digitalWrite(redLED, LOW);
-  }
-
-  while(226 < Speed < 255){
-    digitalWrite(whiteLED, LOW);
-    digitalWrite(greenLED, LOW);
-    digitalWrite(blueLED, LOW);
-    digitalWrite(redLED, HIGH);
-  }
   
 if ( Serial.available() ) // if data is available to read
 {
@@ -102,11 +56,14 @@ switch (param)
 case 1:
 // Android device requests the Arduino to send some data back to Android
 if (Serial)
-{
 // Send back 2 bytes with a value of 1, 2
 Serial.write(1);
 Serial.write(2);
-};
+Serial.write(3);
+{
+Serial.write(Speed);
+}
+
 break;
 case 2: //Forwards
 digitalWrite(8,HIGH);
@@ -116,6 +73,25 @@ digitalWrite(4,LOW);
 digitalWrite(12,LOW);
 digitalWrite(9,LOW);
 digitalWrite(5,LOW);
+if (speedParam == 7)
+{
+  Speed = 255;
+  Serial.write(Speed);
+  digitalWrite(whiteLED,HIGH);
+}
+else if (speedParam == 8)
+{
+  Speed = 75;
+  Serial.write(Speed);
+  digitalWrite(blueLED,HIGH);
+}
+else if (speedParam == 9)
+{
+  Speed = 150;
+  Serial.write(Speed);
+  digitalWrite(redLED,HIGH);
+}
+
 break;
 case 3: //Backwards
 digitalWrite(8,LOW);
@@ -125,6 +101,19 @@ digitalWrite(3,LOW);
 digitalWrite(12,LOW);
 digitalWrite(9,LOW);
 digitalWrite(5,LOW);
+if (speedParam == 7)
+{
+  Speed = 255;
+}
+else if (speedParam == 8)
+{
+  Speed = 75;
+}
+else
+{
+  Speed = 150;
+}
+
 break;
 case 4: // Turn Left
 digitalWrite(8,HIGH);
