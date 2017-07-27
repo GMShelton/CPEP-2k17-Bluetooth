@@ -17,7 +17,6 @@
 
 byte cmd; // Stores the next byte of incoming data, which is a "command" to do something
 byte param; // Stores the 2nd byte, which is the command parameter
-byte speedParam; // Stores 3rd byte for speed
 
 int Speed = 125;  //Defines the speed of the robot
 
@@ -44,7 +43,7 @@ void loop() {
 if ( Serial.available() ) // if data is available to read
 {
 cmd = Serial.read(); // read it and store it in 'cmd'
-// Data format is byte 1 = command, byte 2 = parameter
+// Data format is byte 1 = command, byte 2 = parameter, byte 3 = speedParam
 };
 switch (cmd) {
  case 1:
@@ -55,19 +54,14 @@ switch (cmd) {
 param = Serial.read();
 switch (param)
 
-speedParam = Serial.read();
-switch(speedParam)
-
 {
 case 1:
 // Android device requests the Arduino to send some data back to Android
-
 if (Serial)
-
 {
 Serial.write(1);
 Serial.write(2);
-Serial.write(3);
+Serial.write(Speed);
 }
 
 break;
@@ -79,18 +73,6 @@ digitalWrite(4,LOW);
 digitalWrite(12,LOW);
 digitalWrite(9,LOW);
 digitalWrite(5,LOW);
-if (speedParam == 7)
-{
-  Speed = 255;
-}
-else if (speedParam == 8)
-{
-  Speed = 75;
-}
-else if (speedParam == 9)
-{
-  Speed = 150;
-}
 
 break;
 case 3: //Backwards
@@ -101,18 +83,6 @@ digitalWrite(3,LOW);
 digitalWrite(12,LOW);
 digitalWrite(9,LOW);
 digitalWrite(5,LOW);
-if (speedParam == 7)
-{
-  Speed = 255;
-}
-else if (speedParam == 8)
-{
-  Speed = 75;
-}
-else
-{
-  Speed = 150;
-}
 
 break;
 case 4: // Turn Left
@@ -145,6 +115,21 @@ analogWrite(6,LOW);
 digitalWrite(4,LOW);
 digitalWrite(3,LOW);
 digitalWrite(5,LOW);
+
+break;
+case 7://Fast
+Speed = 255;
+Serial.write(Speed);
+
+break;
+case 8: //Slow
+Speed = 75;
+Serial.write(Speed);
+
+break;
+case 9:
+Speed = 150;
+Serial.write(Speed);
 
 break;
 default: break; // do nothing
