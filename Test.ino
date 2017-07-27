@@ -1,7 +1,10 @@
+// Changing that Tx and Rx
+#include <SoftwareSerial.h> // to use pin 10 and 11 as RX and TX ports
 
 
 
-
+#define sw_serial_rx_pin 11 //  Connect this pin to TX on the HC - 06
+#define sw_serial_tx_pin 10 //  Connect this pin to RX on the HC - 06
 
 #define whiteLED 2
 #define greenLED 6
@@ -33,7 +36,6 @@ pinMode(6,OUTPUT);// PWN/speed controll
 pinMode(5,OUTPUT);//Turn R
 pinMode(4,OUTPUT);//Motor R Back
 pinMode(3,OUTPUT);//Motor R Forward
-pinMode(2,OUTPUT);
 Serial.begin(9600);// Serial (BLuetooth) Communication
 }
 
@@ -52,16 +54,20 @@ switch (cmd) {
 // read the parameter byte
 param = Serial.read();
 switch (param)
+
+speedParam = Serial.read();
+switch(speedParam)
+
 {
 case 1:
 // Android device requests the Arduino to send some data back to Android
+
 if (Serial)
-// Send back 2 bytes with a value of 1, 2
+
+{
 Serial.write(1);
 Serial.write(2);
 Serial.write(3);
-{
-Serial.write(Speed);
 }
 
 break;
@@ -76,20 +82,14 @@ digitalWrite(5,LOW);
 if (speedParam == 7)
 {
   Speed = 255;
-  Serial.write(Speed);
-  digitalWrite(whiteLED,HIGH);
 }
 else if (speedParam == 8)
 {
   Speed = 75;
-  Serial.write(Speed);
-  digitalWrite(blueLED,HIGH);
 }
 else if (speedParam == 9)
 {
   Speed = 150;
-  Serial.write(Speed);
-  digitalWrite(redLED,HIGH);
 }
 
 break;
