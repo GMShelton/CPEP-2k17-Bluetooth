@@ -61,7 +61,6 @@ if (Serial)
 {
 Serial.write(1);
 Serial.write(2);
-Serial.write(Speed);
 }
 
 break;
@@ -120,16 +119,30 @@ break;
 case 7://Fast
 Speed = 255;
 Serial.write(Speed);
+digitalWrite(redLED, HIGH);
+digitalWrite(blueLED, LOW);
+digitalWrite(whiteLED, LOW);
+digitalWrite(greenLED, LOW);
 
 break;
 case 8: //Slow
 Speed = 75;
 Serial.write(Speed);
+digitalWrite(redLED, LOW);
+digitalWrite(blueLED, LOW);
+digitalWrite(whiteLED, HIGH);
+digitalWrite(greenLED, LOW);
+
 
 break;
 case 9:
 Speed = 150;
 Serial.write(Speed);
+digitalWrite(redLED, LOW);
+digitalWrite(blueLED, HIGH);
+digitalWrite(whiteLED, LOW);
+digitalWrite(greenLED, LOW);
+
 
 break;
 default: break; // do nothing
