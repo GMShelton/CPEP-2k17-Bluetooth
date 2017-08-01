@@ -23,6 +23,10 @@ void setup() {
   pinMode(led2, OUTPUT);
 }
 
+int cm = 1; // centimeters
+int in = cm/2.54; // inches
+int ft = in/12; // feet
+
 void loop() {
   long duration, distance;
   digitalWrite(trigPin, LOW);  // Added this line
@@ -33,7 +37,7 @@ void loop() {
   digitalWrite(trigPin, LOW);
   duration = pulseIn(echoPin, HIGH);
   distance = (duration/2) / 29.1;
-  if (distance < 20) {  // This is where the LED On/Off happens
+  if (distance < 20*cm) {  // This is where the LED On/Off happens
     digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
   digitalWrite(led2,LOW);
 }
