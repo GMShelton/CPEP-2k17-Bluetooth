@@ -86,6 +86,7 @@ void loop() {
         // User can additional commands by adding case 2, 3, 4, etc
         {
             param = Serial.read(); // read the parameter byte
+            speedParam = Serial.read(); // read the speed parameter byte
             
             switch (param)  {
                 case 1:
@@ -93,6 +94,7 @@ void loop() {
                     if (Serial)  {
                         Serial.write(1);
                         Serial.write(2);
+                        Serial.write(3);
                     }
                     
                 break;
@@ -160,10 +162,18 @@ void loop() {
         
             } // switch (param)
             
-            speedParam = Serial.read();
-            
             switch (speedParam){
-                case 1:// Fast
+                case 1:
+                    // Android device requests the Arduino to send some data back to Android
+                    if (Serial)  {
+                        Serial.write(1);
+                        Serial.write(2);
+                        Serial.write(3);
+                    }
+                    
+                break;
+                
+                case 2:// Fast
                     Speed = 255;
                     Serial.write(Speed);
                     digitalWrite(redLED, HIGH);
@@ -173,7 +183,7 @@ void loop() {
 
                 break;
       
-                case 2:// Slow
+                case 3:// Slow
                     Speed = 75;
                     Serial.write(Speed);
                     digitalWrite(redLED, LOW);
@@ -183,7 +193,7 @@ void loop() {
 
                 break;
 
-                case 3:
+                case 4:
                     Speed = 150;
                     Serial.write(Speed);
                     digitalWrite(redLED, LOW);
@@ -195,7 +205,7 @@ void loop() {
       
                 default: break; // do nothing
                 
-            }
+            } // switch (speedParam)
 
         } // switch (cmd) case 1
     
