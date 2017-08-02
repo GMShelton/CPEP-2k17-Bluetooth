@@ -35,8 +35,9 @@
 
 byte cmd; // Stores the next byte of incoming data, which is a "command" to do something
 byte param; // Stores the 2nd byte, which is the command parameter
+byte speedParam; // Stores the 3rd byte, which is the speed parameter
 
-int Speed = 125;  //Defines the speed of the robot
+int Speed = 150;  //Defines the speed of the robot
 
 
 void setup() {
@@ -154,7 +155,15 @@ void loop() {
 
                 break;
       
-                case 7:// Fast
+                default: break; // do nothing
+                
+        
+            } // switch (param)
+            
+            speedParam = Serial.read();
+            
+            switch (speedParam){
+                case 1:// Fast
                     Speed = 255;
                     Serial.write(Speed);
                     digitalWrite(redLED, HIGH);
@@ -164,7 +173,7 @@ void loop() {
 
                 break;
       
-                case 8:// Slow
+                case 2:// Slow
                     Speed = 75;
                     Serial.write(Speed);
                     digitalWrite(redLED, LOW);
@@ -174,7 +183,7 @@ void loop() {
 
                 break;
 
-                case 9:
+                case 3:
                     Speed = 150;
                     Serial.write(Speed);
                     digitalWrite(redLED, LOW);
@@ -186,9 +195,8 @@ void loop() {
       
                 default: break; // do nothing
                 
-        
-            } // switch (param)
-            
+            }
+
         } // switch (cmd) case 1
     
         default: break; // do nothing
