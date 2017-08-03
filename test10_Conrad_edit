@@ -152,15 +152,49 @@ void loop() {
                 break;
       
                 case 6: // Stop
-                    analogWrite(pwmMotorR,Speed);  // Why is this line necessary?
+                    analogWrite(pwmMotorR,Speed);  
                     digitalWrite(MotorLF,LOW);
                     digitalWrite(MotorLB,LOW);
                     digitalWrite(MotorRF,LOW);
                     digitalWrite(MotorRB,LOW);
-                    analogWrite(pwmMotorL,Speed);  // Why is this line necessary?
+                    analogWrite(pwmMotorL,Speed);  
 
                 break;
-      
+
+                case 7: // Autonomous (straight path)
+                    // Moving forward
+                    digitalWrite(MotorLF,HIGH);
+                    digitalWrite(MotorLB,LOW);
+                    digitalWrite(MotorRF,HIGH);
+                    digitalWrite(MotorRB,LOW);
+                    analogWrite(pwmMotorR,Speed); 
+                    analogWrite(pwmMotorL,Speed);  
+                    
+                    delay(3000) // 3 seconds, delay is in milliseconds
+                    
+                    // Turning right
+                    digitalWrite(MotorLF,HIGH);
+                    digitalWrite(MotorLB,LOW);
+                    digitalWrite(MotorRF,LOW);
+                    digitalWrite(MotorRB,HIGH);
+                    analogWrite(pwmMotorR,Speed); 
+                    analogWrite(pwmMotorL,Speed);  
+                    
+                    delay(3000) // 3 seconds, delay is in milliseconds                    
+                    
+
+                break;
+
+                case 8: // Autonomous (circle path)
+                    digitalWrite(MotorLF,HIGH);
+                    digitalWrite(MotorLB,LOW);
+                    digitalWrite(MotorRF,LOW);
+                    digitalWrite(MotorRB,HIGH);
+                    analogWrite(pwmMotorR,Speed); 
+                    analogWrite(pwmMotorL,Speed);   
+
+                break;
+                
                 default: break; // do nothing
                 
         
@@ -197,7 +231,7 @@ void loop() {
 
                 break;
 
-                case 4:
+                case 4:// Medium
                     Speed = 150;
                     Serial.write(Speed);
                     digitalWrite(redLED, LOW);
