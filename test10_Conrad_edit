@@ -161,7 +161,7 @@ void loop() {
 
                 break;
 
-                case 7: // Autonomous (straight path)
+                case 7: // Autonomous (polygon path)
                     // Moving forward
                     digitalWrite(MotorLF,HIGH);
                     digitalWrite(MotorLB,LOW);
