@@ -75,7 +75,7 @@ void loop() {
                     digitalWrite(MotorRF,HIGH);
                     digitalWrite(MotorRB,LOW);
                     analogWrite(pwmMotorR,Speed);
-                    analogWrite(pwmMotorL,Speed);
+                    analogWrite(pwmMotorL,Speed*0.8);
 
                 break;
       
@@ -85,7 +85,7 @@ void loop() {
                     digitalWrite(MotorRB,HIGH);
                     digitalWrite(MotorRF,LOW);
                     analogWrite(pwmMotorR,Speed);
-                    analogWrite(pwmMotorL,Speed);
+                    analogWrite(pwmMotorL,Speed*0.8);
 
                 break;
             
@@ -95,7 +95,7 @@ void loop() {
                     digitalWrite(MotorRB,HIGH);
                     digitalWrite(MotorRF,LOW);
                     analogWrite(pwmMotorR,Speed);
-                    analogWrite(pwmMotorL,Speed);
+                    analogWrite(pwmMotorL,Speed*0.8);
                 
                 break;
                 
@@ -106,7 +106,7 @@ void loop() {
                     digitalWrite(MotorLB,HIGH);
                     digitalWrite(MotorRB,LOW);  
                     digitalWrite(MotorRF,HIGH);
-                    analogWrite(pwmMotorL,Speed);
+                    analogWrite(pwmMotorL,Speed*0.8);
                     analogWrite(pwmMotorR,Speed);
 
                 break;
@@ -117,7 +117,7 @@ void loop() {
                     digitalWrite(MotorLB,LOW);
                     digitalWrite(MotorRF,LOW);
                     digitalWrite(MotorRB,LOW);
-                    analogWrite(pwmMotorL,Speed);
+                    analogWrite(pwmMotorL,Speed*0.8);
 
                 break;
       
