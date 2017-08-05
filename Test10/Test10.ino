@@ -1,3 +1,10 @@
+// Why are:
+// pwmMotorL and sw_serial_tx_pin are both on pin 10
+// sw_serial_rx_pin and blueLED both on pin 11
+
+// test10_motor_speed_correction.ino is specifically for the YOunity bot George took home over the weekend (it dampens 
+// the speed of the left motor to match the right motor, which is slower)
+
 // Changing that Tx and Rx
 #include <SoftwareSerial.h> // to use pin 10 and 11 as RX and TX ports
 
