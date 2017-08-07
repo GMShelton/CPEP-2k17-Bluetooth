@@ -55,16 +55,26 @@ int Speed = 150;  //Defines the speed of the robot
 void setup() {
     // put your setup code here, to run once:
 
-    pinMode(13,OUTPUT);//LED built in
-    pinMode(11,OUTPUT);//RX
-    pinMode(pwmMotorL,OUTPUT);//TX
-    pinMode(pwmMotorR,OUTPUT);//Turn L
-    pinMode(MotorLF,OUTPUT);//Motor L Forward
-    pinMode(MotorLB,OUTPUT);//Motor L Back
-    pinMode(MotorRF,OUTPUT);// PWN/speed controll
-    pinMode(MotorRB,OUTPUT);//Turn R
-    pinMode(MotorRF,OUTPUT);//Motor R Forward
-    Serial.begin(9600);// Serial (Bluetooth) Communication
+    pinMode(13,OUTPUT);// LED built in
+    pinMode(12,OUTPUT);// RX
+    pinMode(11,OUTPUT);// TX
+    
+    pinMode(pwmMotorL,OUTPUT);// Motor L PWN/speed controll
+    pinMode(pwmMotorR,OUTPUT);// Motor R PWN/speed controll
+    pinMode(MotorLF,OUTPUT);// Motor L Forward
+    pinMode(MotorLB,OUTPUT);// Motor L Back
+    pinMode(MotorRB,OUTPUT);// Motor R Back
+    pinMode(MotorRF,OUTPUT);// Motor R Forward 
+    
+    pinMode(trigPin,OUTPUT);// An ultrasound pin // (I added this line)
+    pinMode(echoPin,INPUT);// An ultrasound pin // (I added this line)
+    pinMode(led,OUTPUT);// Red LED // (I added this line)
+    pinMode(led2,OUTPUT);// Green LED // (I added this line)
+    
+    digitalWrite(MotorRpwn,255); // (I added this line)
+    digitalWrite(MotorLpwn,255); // (I added this line)
+    
+    Serial.begin(9600);// Serial (Bluetooth) Communication // (I added this line)
 }
 
 
@@ -84,6 +94,15 @@ void turn2() {
 
 
 void loop() {
+    long duration, distance;
+    digitalWrite(trigPin, LOW);  // Added this line
+    delayMicroseconds(2); // Added this line
+    digitalWrite(trigPin, HIGH);
+//  delayMicroseconds(1000); - Removed this line
+    delayMicroseconds(10); // Added this line
+    digitalWrite(trigPin, LOW);
+    duration = pulseIn(echoPin, HIGH);
+    distance = (duration/2) / 29.1;
   
     if ( Serial.available() ) // if data is available to read {
         cmd = Serial.read(); // read it and store it in 'cmd'
@@ -153,7 +172,7 @@ void loop() {
                     // if (the MotorLB is HIGH AND the MotorRB is HIGH) {
                         // turn1();
                     // }                    
-                    
+                      
                     analogWrite(pwmMotorL,Speed);
                     analogWrite(pwmMotorR,Speed);
 
@@ -170,37 +189,82 @@ void loop() {
                 break;
 
                 case 7: // Autonomous (polygon path)
-                    // Moving forward
-                    digitalWrite(MotorLF,HIGH);
-                    digitalWrite(MotorLB,LOW);
-                    digitalWrite(MotorRF,HIGH);
-                    digitalWrite(MotorRB,LOW);
-                    analogWrite(pwmMotorR,Speed); 
-                    analogWrite(pwmMotorL,Speed);  
-                    
-                    delay(3000) // 3 seconds, delay is in milliseconds
-                    
-                    // Turning right
-                    digitalWrite(MotorLF,HIGH);
-                    digitalWrite(MotorLB,LOW);
-                    digitalWrite(MotorRF,LOW);
-                    digitalWrite(MotorRB,HIGH);
-                    analogWrite(pwmMotorR,Speed); 
-                    analogWrite(pwmMotorL,Speed);  
-                    
-                    delay(3000) // 3 seconds, delay is in milliseconds                    
-                    
+                
+                    if (distance < 20*cm) {  // This is where the LED On/Off happens
+                        digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
+                        digitalWrite(MotorLF,LOW);
+                        digitalWrite(MotorRF,LOW);
+                        digitalWrite(MotorLB,HIGH);
+                        digitalWrite(MotorRB,HIGH);
+                        digitalWrite(led2,LOW);
+                    }
+                
+                    else {
+                        // Moving forward
+                        digitalWrite(MotorLF,HIGH);
+                        digitalWrite(MotorLB,LOW);
+                        digitalWrite(MotorRF,HIGH);
+                        digitalWrite(MotorRB,LOW);
+                        analogWrite(pwmMotorR,Speed); 
+                        analogWrite(pwmMotorL,Speed);  
 
+                        delay(3000) // 3 seconds, delay is in milliseconds
+
+                        // Turning right
+                        digitalWrite(MotorLF,HIGH);
+                        digitalWrite(MotorLB,LOW);
+                        digitalWrite(MotorRF,LOW);
+                        digitalWrite(MotorRB,HIGH);
+                        analogWrite(pwmMotorR,Speed); 
+                        analogWrite(pwmMotorL,Speed);  
+
+                        delay(3000) // 3 seconds, delay is in milliseconds                                        
+                    }
+                
+                    if (distance >= 200*cm || distance <= 0*cm){
+                        Serial.println("Out of range");
+                    }
+                
+                    else {
+                        Serial.print(distance);
+                        Serial.println("cm");
+                    }
+                
+                        delay(500);
+          
                 break;
 
                 case 8: // Autonomous (circle path)
-                    digitalWrite(MotorLF,HIGH);
-                    digitalWrite(MotorLB,LOW);
-                    digitalWrite(MotorRF,LOW);
-                    digitalWrite(MotorRB,HIGH);
-                    analogWrite(pwmMotorR,Speed); 
-                    analogWrite(pwmMotorL,Speed);   
-
+                
+                    if (distance < 20*cm) {  // This is where the LED On/Off happens
+                        digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
+                        digitalWrite(MotorLF,LOW);
+                        digitalWrite(MotorRF,LOW);
+                        digitalWrite(MotorLB,HIGH);
+                        digitalWrite(MotorRB,HIGH);
+                        digitalWrite(led2,LOW);
+                    }
+                
+                    else {                     
+                        digitalWrite(MotorLF,HIGH);
+                        digitalWrite(MotorLB,LOW);
+                        digitalWrite(MotorRF,LOW);
+                        digitalWrite(MotorRB,HIGH);
+                        analogWrite(pwmMotorR,Speed); 
+                        analogWrite(pwmMotorL,Speed);                                                                
+                    }
+                
+                    if (distance >= 200*cm || distance <= 0*cm){
+                        Serial.println("Out of range");
+                    }
+                
+                    else {
+                        Serial.print(distance);
+                        Serial.println("cm");
+                    }
+                
+                        delay(500);                
+            
                 break;
                 
                 default: break; // do nothing
