@@ -41,18 +41,23 @@ void setup() {
 
     pinMode(13,OUTPUT);// LED built in
     pinMode(12,OUTPUT);// RX
+    pinMode(11,OUTPUT);// TX
+    
     pinMode(pwmMotorL,OUTPUT);// Motor L PWN/speed controll
     pinMode(pwmMotorR,OUTPUT);// Motor R PWN/speed controll
     pinMode(MotorLF,OUTPUT);// Motor L Forward
     pinMode(MotorLB,OUTPUT);// Motor L Back
     pinMode(MotorRB,OUTPUT);// Motor R Back
     pinMode(MotorRF,OUTPUT);// Motor R Forward 
+    
     pinMode(trigPin,OUTPUT);// An ultrasound pin // (I added this line)
     pinMode(echoPin,INPUT);// An ultrasound pin // (I added this line)
     pinMode(led,OUTPUT);// Red LED // (I added this line)
     pinMode(led2,OUTPUT);// Green LED // (I added this line)
+    
     digitalWrite(MotorRpwn,255); // (I added this line)
     digitalWrite(MotorLpwn,255); // (I added this line)
+    
     Serial.begin(9600);// Serial (Bluetooth) Communication // (I added this line)
 }
 
@@ -180,19 +185,19 @@ void loop() {
                 case 10:  // Made the ultrasonic sensor its own case                  
                     if (distance < 20*cm) {  // This is where the LED On/Off happens
                         digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
-                        digitalWrite(MotorLF,HIGH);
-                        digitalWrite(MotorRF,HIGH);
-                        digitalWrite(MotorLB,LOW);
-                        digitalWrite(MotorRB,LOW);
+                        digitalWrite(MotorLF,LOW);
+                        digitalWrite(MotorRF,LOW);
+                        digitalWrite(MotorLB,HIGH);
+                        digitalWrite(MotorRB,HIGH);
                         digitalWrite(led2,LOW);
                     }
                     else {
                         digitalWrite(led,LOW);
                         digitalWrite(led2,HIGH);
-                        digitalWrite(MotorLF,LOW);
-                        digitalWrite(MotorRF,LOW);
-                        digitalWrite(MotorRB,HIGH);
-                        digitalWrite(MotorLB,HIGH);
+                        digitalWrite(MotorLF,HIGH);
+                        digitalWrite(MotorRF,HIGH);
+                        digitalWrite(MotorRB,LOW);
+                        digitalWrite(MotorLB,LOW);
                     }
                     if (distance >= 200*cm || distance <= 0*cm){
                         Serial.println("Out of range");
