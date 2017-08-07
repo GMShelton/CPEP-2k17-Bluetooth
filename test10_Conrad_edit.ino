@@ -17,13 +17,14 @@
 
 
 
-#define sw_serial_rx_pin 11 //  Connect this pin to TX on the HC - 06
-#define sw_serial_tx_pin 10 //  Connect this pin to RX on the HC - 06
-
 // #define whiteLED 2
 // #define greenLED 3
 // #define blueLED 11
 // #define redLED 12
+
+
+#define sw_serial_rx_pin 12 //  Connect this pin to TX on the HC - 06
+#define sw_serial_tx_pin 11 //  Connect this pin to RX on the HC - 06
 
 #define pwmMotorL 10
 #define pwmMotorR 9
@@ -32,6 +33,13 @@
 #define MotorLF 7
 #define MotorRB 6 //plus is forward back is minus
 #define MotorRF 5
+
+#define trigPin 3
+#define echoPin 4
+
+#define led 2 //redLED
+#define led2 1 //greenLED
+
 
 #define READ_RATE 0 // How often the serial link is read, in milliseconds
 #define FLASH_RATE 100 // The on/off period in milliseconds, for the LED Flash status feedback
