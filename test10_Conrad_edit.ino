@@ -20,10 +20,10 @@
 #define sw_serial_rx_pin 11 //  Connect this pin to TX on the HC - 06
 #define sw_serial_tx_pin 10 //  Connect this pin to RX on the HC - 06
 
-#define whiteLED 2
-#define greenLED 3
-#define blueLED 11
-#define redLED 12
+// #define whiteLED 2
+// #define greenLED 3
+// #define blueLED 11
+// #define redLED 12
 
 #define pwmMotorL 10
 #define pwmMotorR 9
