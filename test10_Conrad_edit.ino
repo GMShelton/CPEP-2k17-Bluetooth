@@ -197,6 +197,9 @@ void loop() {
                         digitalWrite(MotorLB,HIGH);
                         digitalWrite(MotorRB,HIGH);
                         digitalWrite(led2,LOW);
+                        
+                        delay(1500); // added this so YOunity bot backs up a distance before continuing movement
+                      
                     }
                 
                     else {
@@ -243,6 +246,9 @@ void loop() {
                         digitalWrite(MotorLB,HIGH);
                         digitalWrite(MotorRB,HIGH);
                         digitalWrite(led2,LOW);
+                        
+                        delay(1000); // added this so YOunity bot backs up a distance before continuing movement 
+                      
                     }
                 
                     else {                     
