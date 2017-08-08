@@ -26,15 +26,16 @@
 #define led2 1 //greenLED
 
     
-#define READ_RATE 0 // How often the serial link is read, in milliseconds
+#define READ_RATE 100 // How often the serial link is read, in milliseconds
 #define FLASH_RATE 100 // The on/off period in milliseconds, for the LED Flash status feedback
 
 
 byte cmd; // Stores the next byte of incoming data, which is a "command" to do something
 byte param; // Stores the 2nd byte, which is the command parameter
 
-int Speed = 125;  //Defines the speed of the robot
-
+int Speed = 125;  // Defines the speed of the robot
+int SpeedLeft = 62; // Speed correction for left motor (to compensate for slower right motor)
+ 
 
 void setup() {
     // put your setup code here, to run once:
@@ -54,10 +55,10 @@ void setup() {
     pinMode(echoPin,INPUT);// An ultrasound pin // (I added this line)
     pinMode(led,OUTPUT);// Red LED // (I added this line)
     pinMode(led2,OUTPUT);// Green LED // (I added this line)
-    
+//    --------------------------
     digitalWrite(MotorRpwn,255); // (I added this line)
-    digitalWrite(MotorLpwn,255); // (I added this line)
-    
+    digitalWrite(MotorLpwn,127); // (I added this line)
+//    --------------------------
     Serial.begin(9600);// Serial (Bluetooth) Communication // (I added this line)
 }
 
@@ -154,30 +155,30 @@ void loop() {
                 case 7:// Fast
                     Speed = 255;
                     Serial.write(Speed);
-                    digitalWrite(redLED, HIGH);
-                    digitalWrite(blueLED, LOW);
-                    digitalWrite(whiteLED, LOW);
-                    digitalWrite(greenLED, LOW);
+//                    digitalWrite(redLED, HIGH);
+//                    digitalWrite(blueLED, LOW);
+//                    digitalWrite(whiteLED, LOW);
+//                    digitalWrite(greenLED, LOW);
 
                 break;
       
                 case 8:// Slow
                     Speed = 75;
                     Serial.write(Speed);
-                    digitalWrite(redLED, LOW);
-                    digitalWrite(blueLED, LOW);
-                    digitalWrite(whiteLED, HIGH);
-                    digitalWrite(greenLED, LOW);
+//                    digitalWrite(redLED, LOW);
+//                    digitalWrite(blueLED, LOW);
+//                    digitalWrite(whiteLED, HIGH);
+//                    digitalWrite(greenLED, LOW);
 
                 break;
 
                 case 9:
                     Speed = 150;
                     Serial.write(Speed);
-                    digitalWrite(redLED, LOW);
-                    digitalWrite(blueLED, HIGH);
-                    digitalWrite(whiteLED, LOW);
-                    digitalWrite(greenLED, LOW);
+//                    digitalWrite(redLED, LOW);
+//                    digitalWrite(blueLED, HIGH);
+//                    digitalWrite(whiteLED, LOW);
+//                    digitalWrite(greenLED, LOW);
 
                 break;
       
