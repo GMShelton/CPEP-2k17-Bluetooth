@@ -23,8 +23,8 @@
 // #define redLED 12
 
 
-#define sw_serial_rx_pin 12 //  Connect this pin to TX on the HC - 06
-#define sw_serial_tx_pin 11 //  Connect this pin to RX on the HC - 06
+//#define sw_serial_rx_pin 12 //  Connect this pin to TX on the HC - 06
+//#define sw_serial_tx_pin 11 //  Connect this pin to RX on the HC - 06
 
 #define pwmMotorL 10
 #define pwmMotorR 9
@@ -34,8 +34,10 @@
 #define MotorRB 6 //plus is forward back is minus
 #define MotorRF 5
 
-#define trigPin 3
-#define echoPin 4
+#define trigPin 12 //George 
+#define echoPin 11 //George
+#define USGnd 4 //George
+#define USVcc 3 //George
 
 #define led 2 //redLED
 #define led2 1 //greenLED
@@ -56,8 +58,6 @@ void setup() {
     // put your setup code here, to run once:
 
     pinMode(13,OUTPUT);// LED built in
-    pinMode(12,OUTPUT);// RX
-    pinMode(11,OUTPUT);// TX
     
     pinMode(pwmMotorL,OUTPUT);// Motor L PWN/speed controll
     pinMode(pwmMotorR,OUTPUT);// Motor R PWN/speed controll
@@ -68,11 +68,16 @@ void setup() {
     
     pinMode(trigPin,OUTPUT);// An ultrasound pin // (I added this line)
     pinMode(echoPin,INPUT);// An ultrasound pin // (I added this line)
+    pinMode(USVcc,OUTPUT); //Geogre
+    pinMode(USGnd,OUTPUT); //George
     pinMode(led,OUTPUT);// Red LED // (I added this line)
     pinMode(led2,OUTPUT);// Green LED // (I added this line)
     
     digitalWrite(MotorRpwn,255); // (I added this line)
     digitalWrite(MotorLpwn,255); // (I added this line)
+  
+    digitalWrite(USVcc,HIGH);
+    digitalWrite(USGnd,LOW);
     
     Serial.begin(9600);// Serial (Bluetooth) Communication // (I added this line)
 }
