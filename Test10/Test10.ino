@@ -26,7 +26,7 @@
 #define MotorRB 6 //plus is forward back is minus
 #define MotorRF 5
 
-#define READ_RATE 0 // How often the serial link is read, in milliseconds
+#define READ_RATE 100 // How often the serial link is read, in milliseconds
 #define FLASH_RATE 100 // The on/off period in milliseconds, for the LED Flash status feedback
 
 
