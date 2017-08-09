@@ -208,7 +208,7 @@ void loop() {
                             analogWrite(pwmMotorR,Speed); 
                             analogWrite(pwmMotorL,Speed);  
 
-                            delay(3000) // 3 seconds, delay is in milliseconds
+                            delay(3000); // 3 seconds, delay is in milliseconds
 
                             // Turning right
                             digitalWrite(MotorLF,HIGH);
@@ -218,7 +218,7 @@ void loop() {
                             analogWrite(pwmMotorR,Speed); 
                             analogWrite(pwmMotorL,Speed);  
 
-                            delay(3000) // 3 seconds, delay is in milliseconds                           
+                            delay(3000); // 3 seconds, delay is in milliseconds                           
                         }
                                     
                     }
