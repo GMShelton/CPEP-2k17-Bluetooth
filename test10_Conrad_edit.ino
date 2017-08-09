@@ -39,7 +39,7 @@
 #define USGnd 4 //George
 #define USVcc 3 //George
 
-#define led 2 //redLED
+#define led 13 //redLED
 #define led2 1 //greenLED
 
 
@@ -73,8 +73,8 @@ void setup() {
     pinMode(led,OUTPUT);// Red LED // (I added this line)
     pinMode(led2,OUTPUT);// Green LED // (I added this line)
     
-    digitalWrite(MotorRpwn,255); // (I added this line)
-    digitalWrite(MotorLpwn,255); // (I added this line)
+   // digitalWrite(MotorRpwn,255); // (I added this line)
+   // digitalWrite(MotorLpwn,255); // (I added this line)
   
     digitalWrite(USVcc,HIGH);
     digitalWrite(USGnd,LOW);
