@@ -145,7 +145,7 @@ Serial.write(Speed);
 
 
 break;
-case 9:
+case 9: // Medium
 Speed = 150;
 Serial.write(Speed);
 
