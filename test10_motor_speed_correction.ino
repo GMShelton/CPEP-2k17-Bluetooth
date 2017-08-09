@@ -106,7 +106,7 @@ void loop() {
                     digitalWrite(MotorRF,HIGH);
                     digitalWrite(MotorRB,LOW);
                     analogWrite(pwmMotorR,Speed);
-                    analogWrite(pwmMotorL,Speed*0.8);
+                    analogWrite(pwmMotorL,SpeedLeft);
 
                 break;
       
@@ -116,7 +116,7 @@ void loop() {
                     digitalWrite(MotorRB,HIGH);
                     digitalWrite(MotorRF,LOW);
                     analogWrite(pwmMotorR,Speed);
-                    analogWrite(pwmMotorL,Speed*0.8);
+                    analogWrite(pwmMotorL,SpeedLeft);
 
                 break;
             
@@ -126,7 +126,7 @@ void loop() {
                     digitalWrite(MotorRB,HIGH);
                     digitalWrite(MotorRF,LOW);
                     analogWrite(pwmMotorR,Speed);
-                    analogWrite(pwmMotorL,Speed*0.8);
+                    analogWrite(pwmMotorL,SpeedLeft);
                 
                 break;
                 
@@ -137,7 +137,7 @@ void loop() {
                     digitalWrite(MotorLB,HIGH);
                     digitalWrite(MotorRB,LOW);  
                     digitalWrite(MotorRF,HIGH);
-                    analogWrite(pwmMotorL,Speed*0.8);
+                    analogWrite(pwmMotorL,SpeedLeft);
                     analogWrite(pwmMotorR,Speed);
 
                 break;
@@ -148,13 +148,15 @@ void loop() {
                     digitalWrite(MotorLB,LOW);
                     digitalWrite(MotorRF,LOW);
                     digitalWrite(MotorRB,LOW);
-                    analogWrite(pwmMotorL,Speed*0.8);
+                    analogWrite(pwmMotorL,SpeedLeft);
 
                 break;
       
                 case 7:// Fast
                     Speed = 255;
+                    SpeedLeft = 127;
                     Serial.write(Speed);
+                    Serial.write(SpeedLeft);                    
 //                    digitalWrite(redLED, HIGH);
 //                    digitalWrite(blueLED, LOW);
 //                    digitalWrite(whiteLED, LOW);
@@ -164,7 +166,9 @@ void loop() {
       
                 case 8:// Slow
                     Speed = 75;
+                    SpeedLeft = 37;
                     Serial.write(Speed);
+                    Serial.write(SpeedLeft);
 //                    digitalWrite(redLED, LOW);
 //                    digitalWrite(blueLED, LOW);
 //                    digitalWrite(whiteLED, HIGH);
@@ -174,7 +178,9 @@ void loop() {
 
                 case 9:
                     Speed = 150;
+                    SpeedLeft = 75;
                     Serial.write(Speed);
+                    Serial.write(SpeedLeft);
 //                    digitalWrite(redLED, LOW);
 //                    digitalWrite(blueLED, HIGH);
 //                    digitalWrite(whiteLED, LOW);
