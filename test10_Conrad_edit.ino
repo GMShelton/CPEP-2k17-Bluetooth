@@ -212,25 +212,29 @@ void loop() {
                     }
                 
                     else {
-                        // Moving forward
-                        digitalWrite(MotorLF,HIGH);
-                        digitalWrite(MotorLB,LOW);
-                        digitalWrite(MotorRF,HIGH);
-                        digitalWrite(MotorRB,LOW);
-                        analogWrite(pwmMotorR,Speed); 
-                        analogWrite(pwmMotorL,Speed);  
+                        
+                        while (1 == 1) {
+                             // Moving forward
+                            digitalWrite(MotorLF,HIGH);
+                            digitalWrite(MotorLB,LOW);
+                            digitalWrite(MotorRF,HIGH);
+                            digitalWrite(MotorRB,LOW);
+                            analogWrite(pwmMotorR,Speed); 
+                            analogWrite(pwmMotorL,Speed);  
 
-                        delay(3000) // 3 seconds, delay is in milliseconds
+                            delay(3000) // 3 seconds, delay is in milliseconds
 
-                        // Turning right
-                        digitalWrite(MotorLF,HIGH);
-                        digitalWrite(MotorLB,LOW);
-                        digitalWrite(MotorRF,LOW);
-                        digitalWrite(MotorRB,HIGH);
-                        analogWrite(pwmMotorR,Speed); 
-                        analogWrite(pwmMotorL,Speed);  
+                            // Turning right
+                            digitalWrite(MotorLF,HIGH);
+                            digitalWrite(MotorLB,LOW);
+                            digitalWrite(MotorRF,LOW);
+                            digitalWrite(MotorRB,HIGH);
+                            analogWrite(pwmMotorR,Speed); 
+                            analogWrite(pwmMotorL,Speed);  
 
-                        delay(3000) // 3 seconds, delay is in milliseconds                                        
+                            delay(3000) // 3 seconds, delay is in milliseconds                           
+                        }
+                                    
                     }
                 
                     if (distance >= 200*cm || distance <= 0*cm){
@@ -261,12 +265,15 @@ void loop() {
                     }
                 
                     else {                     
-                        digitalWrite(MotorLF,HIGH);
-                        digitalWrite(MotorLB,LOW);
-                        digitalWrite(MotorRF,LOW);
-                        digitalWrite(MotorRB,HIGH);
-                        analogWrite(pwmMotorR,Speed); 
-                        analogWrite(pwmMotorL,Speed);                                                                
+                        while (1 == 1) {
+                            digitalWrite(MotorLF,HIGH);
+                            digitalWrite(MotorLB,LOW);
+                            digitalWrite(MotorRF,LOW);
+                            digitalWrite(MotorRB,HIGH);
+                            analogWrite(pwmMotorR,Speed); 
+                            analogWrite(pwmMotorL,Speed);  
+                        }
+                                                              
                     }
                 
                     if (distance >= 200*cm || distance <= 0*cm){
