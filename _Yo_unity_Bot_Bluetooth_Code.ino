@@ -23,7 +23,7 @@ SoftwareSerial mySerial(11, 12);
 byte cmd; // Stores the next byte of incoming data, which is a "command" to do something
 byte param; // Stores the 2nd byte, which is the command parameter
 
-int Speed = 125;  //Defines the speed of the robot
+int Speed = 150;  //Defines the speed of the robot
 
 
 void setup() {
