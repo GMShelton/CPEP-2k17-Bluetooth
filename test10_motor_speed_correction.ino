@@ -23,7 +23,7 @@
 #define echoPin 4
 
 #define led 2 //redLED
-#define led2 1 //greenLED
+#define led2 13 //greenLED
 
     
 #define READ_RATE 100 // How often the serial link is read, in milliseconds
