@@ -152,7 +152,7 @@ Serial.write(Speed);
 
 
 break;
-case 10:
+case 10: // Polygon Path
 if (distance < 20*cm) {  // This is where the LED On/Off happens
  
                         digitalWrite(MotorLF,LOW);
@@ -200,7 +200,7 @@ if (distance < 20*cm) {  // This is where the LED On/Off happens
                         delay(500);
           
                 break;
-case 11:
+case 11: // Circle Path
  if (distance < 20*cm) {  // This is where the LED On/Off happens
                         
                         digitalWrite(MotorLF,LOW);
