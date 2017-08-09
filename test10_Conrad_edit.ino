@@ -29,7 +29,7 @@
 #define led2 13 //greenLED
 
 
-#define READ_RATE 0 // How often the serial link is read, in milliseconds
+#define READ_RATE 100 // How often the serial link is read, in milliseconds
 #define FLASH_RATE 100 // The on/off period in milliseconds, for the LED Flash status feedback
 
 
@@ -185,7 +185,7 @@ void loop() {
 
                 case 7: // Autonomous (polygon path)
                 
-                    if (distance < 20*cm) {  // This is where the LED On/Off happens
+                    if (distance < 40*cm) {  // This is where the LED On/Off happens
                         digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
                         digitalWrite(MotorLF,LOW);
                         digitalWrite(MotorRF,LOW);
@@ -238,7 +238,7 @@ void loop() {
 
                 case 8: // Autonomous (circle path)
                 
-                    if (distance < 20*cm) {  // This is where the LED On/Off happens
+                    if (distance < 40*cm) {  // This is where the LED On/Off happens
                         digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
                         digitalWrite(MotorLF,LOW);
                         digitalWrite(MotorRF,LOW);
