@@ -301,31 +301,35 @@ void loop() {
                 case 2:// Fast
                     Speed = 255;
                     Serial.write(Speed);
+                /** 
                     digitalWrite(redLED, HIGH);
                     digitalWrite(blueLED, LOW);
                     digitalWrite(whiteLED, LOW);
                     digitalWrite(greenLED, LOW);
-
+                **/
                 break;
       
                 case 3:// Slow
                     Speed = 75;
-                    Serial.write(Speed);
+                    Serial.write(Speed);                
+                /**
                     digitalWrite(redLED, LOW);
                     digitalWrite(blueLED, LOW);
                     digitalWrite(whiteLED, HIGH);
                     digitalWrite(greenLED, LOW);
-
+                 **/
                 break;
 
                 case 4:// Medium
+               
                     Speed = 150;
-                    Serial.write(Speed);
+                    Serial.write(Speed);               
+                 /**
                     digitalWrite(redLED, LOW);
                     digitalWrite(blueLED, HIGH);
                     digitalWrite(whiteLED, LOW);
                     digitalWrite(greenLED, LOW);
-
+                **/
                 break;
       
                 default: break; // do nothing
