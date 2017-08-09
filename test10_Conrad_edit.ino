@@ -25,8 +25,8 @@
 #define USGnd 4 //George
 #define USVcc 3 //George
 
-#define led 13 //redLED
-#define led2 1 //greenLED
+#define led 2 //redLED
+#define led2 13 //greenLED
 
 
 #define READ_RATE 0 // How often the serial link is read, in milliseconds
