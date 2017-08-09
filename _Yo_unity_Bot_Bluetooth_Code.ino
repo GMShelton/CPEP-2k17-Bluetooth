@@ -10,8 +10,8 @@ SoftwareSerial mySerial(11, 12);
 #define MotorRB 6 //plus is forward back is minus
 #define MotorRF 5
 
-#define trigPin 12 //George 
-#define echoPin 11 //George
+#define trigPin 11 //George 
+#define echoPin 12 //George
 #define USGnd 4 //George
 #define USVcc 3 //George
 
