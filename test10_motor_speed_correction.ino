@@ -184,7 +184,7 @@ void loop() {
       
                     
                 case 10:  // Made the ultrasonic sensor its own case                  
-                    if (distance < 20*cm) {  // This is where the LED On/Off happens
+                    if (distance < 40*cm) {  // This is where the LED On/Off happens
                         digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
                         digitalWrite(MotorLF,LOW);
                         digitalWrite(MotorRF,LOW);
