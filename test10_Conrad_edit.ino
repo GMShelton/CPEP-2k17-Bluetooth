@@ -1,17 +1,3 @@
-// 7/29 changes
-// - turn 1: left turn while moving forward  turn 2: right turn while moving forward
-//  to turn left while going backward, activate turn 2 and for turn right, turn 1
-  
-// - Switched order of digital writes in movement so it goes: LB, LF, RB, RF (8, 7, 6, 5) instead of LF, LB, RB, RF (7, 8, 6, 5)
-
-// - I made an if statement in turn left to check whether both MotorLF and Motor RF are HIGH, and an if statement in turn right to
-//  check whether both MotorLB and Motor RB are HIGH, but how do you check if the motors are HIGH?
-
-// 8/2 changes
-// made speedParam the third byte of data that will be received along with cmd and param and moved the cases controlling speed 
-// into a new switch function for speedParam
-
-
 // Changing that Tx and Rx
 #include <SoftwareSerial.h> // to use pin 10 and 11 as RX and TX ports
 
