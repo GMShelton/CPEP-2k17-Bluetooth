@@ -25,8 +25,8 @@
 #define USGnd 4 //George
 #define USVcc 3 //George
 
-#define led 2 //redLED
-#define led2 13 //greenLED
+// #define led 2 //redLED
+// #define led2 13 //greenLED
 
 
 #define READ_RATE 100 // How often the serial link is read, in milliseconds
@@ -43,7 +43,7 @@ int Speed = 150;  //Defines the speed of the robot
 void setup() {
     // put your setup code here, to run once:
 
-    pinMode(13,OUTPUT);// LED built in
+//    pinMode(13,OUTPUT);// LED built in
     
     pinMode(pwmMotorL,OUTPUT);// Motor L PWN/speed controll
     pinMode(pwmMotorR,OUTPUT);// Motor R PWN/speed controll
@@ -56,8 +56,8 @@ void setup() {
     pinMode(echoPin,INPUT);// An ultrasound pin // (I added this line)
     pinMode(USVcc,OUTPUT); //Geogre
     pinMode(USGnd,OUTPUT); //George
-    pinMode(led,OUTPUT);// Red LED // (I added this line)
-    pinMode(led2,OUTPUT);// Green LED // (I added this line)
+//    pinMode(led,OUTPUT);// Red LED // (I added this line)
+//    pinMode(led2,OUTPUT);// Green LED // (I added this line)
     
    // digitalWrite(MotorRpwn,255); // (I added this line)
    // digitalWrite(MotorLpwn,255); // (I added this line)
@@ -186,12 +186,12 @@ void loop() {
                 case 7: // Autonomous (polygon path)
                 
                     if (distance < 40*cm) {  // This is where the LED On/Off happens
-                        digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
+//                        digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
                         digitalWrite(MotorLF,LOW);
                         digitalWrite(MotorRF,LOW);
                         digitalWrite(MotorLB,HIGH);
                         digitalWrite(MotorRB,HIGH);
-                        digitalWrite(led2,LOW);
+//                        digitalWrite(led2,LOW);
                         
                         delay(1500); // added this so YOunity bot backs up a distance before continuing movement
                       
@@ -239,12 +239,12 @@ void loop() {
                 case 8: // Autonomous (circle path)
                 
                     if (distance < 40*cm) {  // This is where the LED On/Off happens
-                        digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
+//                        digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
                         digitalWrite(MotorLF,LOW);
                         digitalWrite(MotorRF,LOW);
                         digitalWrite(MotorLB,HIGH);
                         digitalWrite(MotorRB,HIGH);
-                        digitalWrite(led2,LOW);
+//                        digitalWrite(led2,LOW);
                         
                         delay(1000); // added this so YOunity bot backs up a distance before continuing movement 
                       
