@@ -97,6 +97,9 @@ void turn2() {
     digitalWrite(MotorRF,LOW);
 }
 
+int cm = 1; // centimeters
+int in = cm/2.54; // inches
+int ft = in/12; // feet
 
 void loop() {
     long duration, distance;
