@@ -77,8 +77,8 @@ void turn1() {
 }
 
 void turn2() {
-    digitalWrite(MotorLB,HIGH);
-    digitalWrite(MotorLF,LOW);
+    digitalWrite(MotorLB,LOW);
+    digitalWrite(MotorLF,HIGH);
     digitalWrite(MotorRB,HIGH);
     digitalWrite(MotorRF,LOW);
 }
