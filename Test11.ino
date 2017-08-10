@@ -3,11 +3,6 @@
 SoftwareSerial mySerial(11, 12);
 
 
-
-
-
-
-
 #define pwmMotorL 10
 #define pwmMotorR 9
 
@@ -36,27 +31,27 @@ int Bord = 0;
 
 
 void setup() {
-  // put your setup code here, to run once:
+    // put your setup code here, to run once:
 
-pinMode(13,OUTPUT);//LED built in
-pinMode(pwmMotorL,OUTPUT);//TX
-pinMode(pwmMotorR,OUTPUT);//Turn L
-pinMode(MotorLF,OUTPUT);//Motor L Forward
-pinMode(MotorLB,OUTPUT);//Motor L Back
-pinMode(MotorRF,OUTPUT);// PWN/speed controll
-pinMode(MotorRB,OUTPUT);//Turn R
-pinMode(MotorRF,OUTPUT);//Motor R Forward
-pinMode(trigPin,OUTPUT);// 
-pinMode(echoPin,INPUT);// 
-pinMode(USVcc,OUTPUT); 
-pinMode(USGnd,OUTPUT); 
-digitalWrite(USGnd,LOW);
-digitalWrite(USVcc,HIGH);
-Serial.begin(9600);// Serial (Bluetooth) Communication
+    pinMode(13,OUTPUT);//LED built in
+    pinMode(pwmMotorL,OUTPUT);//TX
+    pinMode(pwmMotorR,OUTPUT);//Turn L
+    pinMode(MotorLF,OUTPUT);//Motor L Forward
+    pinMode(MotorLB,OUTPUT);//Motor L Back
+    pinMode(MotorRF,OUTPUT);// PWN/speed controll
+    pinMode(MotorRB,OUTPUT);//Turn R
+    pinMode(MotorRF,OUTPUT);//Motor R Forward
+    pinMode(trigPin,OUTPUT);// 
+    pinMode(echoPin,INPUT);// 
+    pinMode(USVcc,OUTPUT); 
+    pinMode(USGnd,OUTPUT); 
+    digitalWrite(USGnd,LOW);
+    digitalWrite(USVcc,HIGH);
+    Serial.begin(9600);// Serial (Bluetooth) Communication
 }
 
 void loop() {
-  long duration, distance;
+    long duration, distance;
     digitalWrite(trigPin, LOW);  // Added this line
     delayMicroseconds(2); // Added this line
     digitalWrite(trigPin, HIGH);
@@ -90,6 +85,7 @@ Serial.write(2);
 }
 
 break;
+    
 case 2: //Forwards
 digitalWrite(MotorLF,HIGH);
 digitalWrite(MotorLB,LOW);
@@ -97,7 +93,9 @@ digitalWrite(MotorRF,HIGH);
 digitalWrite(MotorRB,LOW);
 analogWrite(pwmMotorR,Speed);
 analogWrite(pwmMotorL,Speed);
+    
 break;
+    
 case 3: //Backwards
 digitalWrite(MotorLF,LOW);
 digitalWrite(MotorLB,HIGH);
@@ -107,6 +105,7 @@ analogWrite(pwmMotorR,Speed);
 analogWrite(pwmMotorL,Speed);
 
 break;
+    
 case 4: // Turn Left
 digitalWrite(MotorLF,HIGH);
 digitalWrite(MotorLB,LOW);
@@ -114,10 +113,10 @@ digitalWrite(MotorRB,HIGH);
 digitalWrite(MotorRF,LOW);
 analogWrite(pwmMotorR,Speed);
 analogWrite(pwmMotorL,Speed);
+    
 break;
-case 5: // Turn Right? Its 1:10 AM and I just want to celebrate my relative success and not fix
-//all the problems so Tomorrow. I think right now the LEft will turn right and the Right will turn left.
-//I'll confirm this is a minute but not fix it. I'll fix it tomorrow
+    
+case 5: //Turn Right
 digitalWrite(MotorLF,LOW);
 digitalWrite(MotorLB,HIGH);
 digitalWrite(MotorRB,LOW);
@@ -125,7 +124,8 @@ digitalWrite(MotorRF,HIGH);
 analogWrite(pwmMotorL,Speed);
 analogWrite(pwmMotorR,Speed);
 
-break;
+break; 
+    
 case 6: // Stop
 analogWrite(pwmMotorR,Speed);
 digitalWrite(MotorLF,LOW);
@@ -135,30 +135,28 @@ digitalWrite(MotorRB,LOW);
 analogWrite(pwmMotorL,Speed);
 
 break;
+    
 case 7:// Fast
 Speed = 255;
 Serial.write(Speed);
 
-
 break;
+    
 case 8:// Slow
 Speed = 75;
 Serial.write(Speed);
 
-
-
 break;
+    
 case 9:
 Speed = 150;
 Serial.write(Speed);
 
-
-
 break;
-case 10:
-
-if (distance < 20*cm) {  // This is where the LED On/Off happens
- 
+    
+                case 10:
+                    if (distance < 20*cm) {  // This is where the LED On/Off happens
+                        
                         digitalWrite(MotorLF,LOW);
                         digitalWrite(MotorRF,LOW);
                         digitalWrite(MotorLB,HIGH);
@@ -207,8 +205,9 @@ if (distance < 20*cm) {  // This is where the LED On/Off happens
                         delay(500);
           
                 break;
-case 11:
- if (distance < 20*cm) {  // This is where the LED On/Off happens
+    
+                case 11:
+                    if (distance < 20*cm) {  // This is where the LED On/Off happens
                         
                         digitalWrite(MotorLF,LOW);
                         digitalWrite(MotorRF,LOW);
@@ -239,14 +238,17 @@ case 11:
                 
                         delay(500);                
             
+                    default: break; // do nothing
+    
+                } // switch (param)
+  
+            } // switch (cmd) case 1
+    
+        default: break; // do nothing
+    
+    } // switch (cmd)
 
-default: break; // do nothing
-} // switch (param)
-} // switch (cmd) case 1
-default: break; // do nothing
-} // switch (cmd)
-
-delay(READ_RATE); // wait 100ms for next readin
+    delay(READ_RATE); // wait 100ms for next readin
 
 }
 
