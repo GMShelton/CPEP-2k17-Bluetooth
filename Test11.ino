@@ -32,6 +32,7 @@ int Speed = 150;  //Defines the speed of the robot
 int cm = 1; // centimeters
 int in = cm/2.54; // inches
 int ft = in/12; // feet
+int Bord = 0;
 
 
 void setup() {
@@ -49,6 +50,8 @@ pinMode(trigPin,OUTPUT);//
 pinMode(echoPin,INPUT);// 
 pinMode(USVcc,OUTPUT); 
 pinMode(USGnd,OUTPUT); 
+digitalWrite(USGnd,LOW);
+digitalWrite(USVcc,HIGH);
 Serial.begin(9600);// Serial (Bluetooth) Communication
 }
 
@@ -145,34 +148,37 @@ Serial.write(Speed);
 
 
 break;
-case 9: // Medium
+case 9:
 Speed = 150;
 Serial.write(Speed);
 
 
 
 break;
-case 10: // Polygon Path
+case 10:
+
 if (distance < 20*cm) {  // This is where the LED On/Off happens
  
                         digitalWrite(MotorLF,LOW);
                         digitalWrite(MotorRF,LOW);
                         digitalWrite(MotorLB,HIGH);
                         digitalWrite(MotorRB,HIGH);
+                        digitalWrite(pwmMotorL,255);
+                        digitalWrite(pwmMotorR,255);
                         
                         delay(1500); // added this so YOunity bot backs up a distance before continuing movement
                       
                     }
                 
                     else {
-                      while (1 == 1) {
+                      while (Bord < 4) {
                         // Moving forward
                         digitalWrite(MotorLF,HIGH);
                         digitalWrite(MotorLB,LOW);
                         digitalWrite(MotorRF,HIGH);
                         digitalWrite(MotorRB,LOW);
-                        analogWrite(pwmMotorR,Speed); 
-                        analogWrite(pwmMotorL,Speed);  
+                        analogWrite(pwmMotorR,255); 
+                        analogWrite(pwmMotorL,255);  
 
                         delay(3000); // 3 seconds, delay is in milliseconds
 
@@ -181,10 +187,11 @@ if (distance < 20*cm) {  // This is where the LED On/Off happens
                         digitalWrite(MotorLB,LOW);
                         digitalWrite(MotorRF,LOW);
                         digitalWrite(MotorRB,HIGH);
-                        analogWrite(pwmMotorR,Speed); 
-                        analogWrite(pwmMotorL,Speed);  
+                        analogWrite(pwmMotorR,255); 
+                        analogWrite(pwmMotorL,255);  
 
-                        delay(3000); // 3 seconds, delay is in milliseconds    
+                        delay(3000); // 3 seconds, delay is in milliseconds
+                        Bord += 1;    
                       }                                    
                     }
                 
@@ -200,7 +207,7 @@ if (distance < 20*cm) {  // This is where the LED On/Off happens
                         delay(500);
           
                 break;
-case 11: // Circle Path
+case 11:
  if (distance < 20*cm) {  // This is where the LED On/Off happens
                         
                         digitalWrite(MotorLF,LOW);
@@ -217,8 +224,8 @@ case 11: // Circle Path
                         digitalWrite(MotorLB,LOW);
                         digitalWrite(MotorRF,LOW);
                         digitalWrite(MotorRB,LOW);
-                        analogWrite(pwmMotorR,Speed); 
-                        analogWrite(pwmMotorL,Speed);                                                                
+                        analogWrite(pwmMotorR,255); 
+                        analogWrite(pwmMotorL,255);                                                                
                     }
                 
                     if (distance >= 200*cm || distance <= 0*cm){
