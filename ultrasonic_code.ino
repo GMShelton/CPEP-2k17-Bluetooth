@@ -10,40 +10,36 @@
  Some code and wiring inspired by http://en.wikiversity.org/wiki/User:Dstaub/robotcar
  */
 
-#define trigPin 13
-#define echoPin 12
-#define led 11 //redLED
-#define MotorLF 7
+#define pwmMotorL 10
+#define pwmMotorR 9
+
 #define MotorLB 8
-#define MotorRpwn 10
-#define MotorLpwn 9
-#define MotorRF 6
-#define MotorRB 5
+#define MotorLF 7
+#define MotorRB 6 //plus is forward back is minus
+#define MotorRF 5 
 
-// #define led2 10 //greenLED
-
+#define trigPin 12 //George 
+#define echoPin 11 //George
+#define USGnd 4 //George
+#define USVcc 3 //George
 
 void setup() {
   Serial.begin (9600);
   pinMode(trigPin,OUTPUT);
   pinMode(echoPin,INPUT);
-  pinMode(led,OUTPUT);
-//  pinMode(led2,OUTPUT);
   pinMode(MotorLF,OUTPUT);
   pinMode(MotorRF,OUTPUT);
   pinMode(MotorLB,OUTPUT);
   pinMode(MotorRF,OUTPUT);
-  pinMode(MotorLpwn,OUTPUT);
-  pinMode(MotorRpwn,OUTPUT);
-  pinMode(2,OUTPUT);  
-  pinMode(3,OUTPUT);
-  pinMode(4,OUTPUT);
-  digitalWrite(2,LOW);  
-  digitalWrite(3,HIGH);
-  digitalWrite(4,LOW);
+  pinMode(pwmMotorL,OUTPUT);
+  pinMode(pwmMotorR,OUTPUT);
+  pinMode(USGnd,OUTPUT);
+  pinMode(USVcc,OUTPUT);
+  digitalWrite(USGnd,LOW);
+  digitalWrite(USVcc,HIGH);
+  digitalWrite(pwmMotorL,170);
+  digitalWrite(pwmMotorR,170);
   
-  analogWrite(MotorRpwn,255);
-  analogWrite(MotorLpwn,127);
 }
 
 int cm = 1; // centimeters
@@ -60,20 +56,16 @@ void loop() {
   digitalWrite(trigPin, LOW);
   duration = pulseIn(echoPin, HIGH);
   distance = (duration/2) / 29.1;
-  if (distance < 40*cm) {  // This is where the LED On/Off happens
-    digitalWrite(led,HIGH); // When the Red condition is met, the Green LED should turn off
-    digitalWrite( MotorLF,LOW);
-    digitalWrite(MotorRF,LOW);
-    digitalWrite(MotorLB,LOW);
+  if (distance <30*cm) {  // This is where the LED On/Off happens
+     // When the Red condition is met, the Green LED should turn off
+    digitalWrite(MotorLF,LOW);
+    digitalWrite(MotorRF,HIGH);
+    digitalWrite(MotorLB,HIGH);
     digitalWrite(MotorRB,LOW);
- //   digitalWrite(led2,LOW);
-   
-//    delay(500); // Added this line so that the YOunity bot backs up a distance before continuing regular motion.
-   
+  
 }
   else {
-    digitalWrite(led,LOW);
-//    digitalWrite(led2,HIGH);
+    
     digitalWrite(MotorLF,HIGH);
     digitalWrite(MotorRF,HIGH);
     digitalWrite(MotorRB,LOW);
