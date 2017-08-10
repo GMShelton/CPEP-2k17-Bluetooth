@@ -61,98 +61,98 @@ void loop() {
     duration = pulseIn(echoPin, HIGH);
     distance = (duration/2) / 29.1;
   
-if ( Serial.available() ) // if data is available to read
-{
-cmd = Serial.read(); // read it and store it in 'cmd'
-// Data format is byte 1 = command, byte 2 = parameter, byte 3 = speedParam
-};
-switch (cmd) {
- case 1:
-// First byte contains a generic "command" byte. We arbitrarily defined '1' as the command to then check the 2nd parameter byte
-// User can additional commands by adding case 2, 3, 4, etc
-{
-// read the parameter byte
-param = Serial.read();
-switch (param)
+        if ( Serial.available() ) // if data is available to read
+        {
+        cmd = Serial.read(); // read it and store it in 'cmd'
+        // Data format is byte 1 = command, byte 2 = parameter, byte 3 = speedParam
+        };
+            switch (cmd) {
+             case 1:
+            // First byte contains a generic "command" byte. We arbitrarily defined '1' as the command to then check the 2nd parameter byte
+            // User can additional commands by adding case 2, 3, 4, etc
+            {
+            // read the parameter byte
+            param = Serial.read();
+            switch (param)
 
-{
-case 1:
-// Android device requests the Arduino to send some data back to Android
-if (Serial)
-{
-Serial.write(1);
-Serial.write(2);
-}
+            {
+                case 1:
+                // Android device requests the Arduino to send some data back to Android
+                    if (Serial)
+                    {
+                    Serial.write(1);
+                    Serial.write(2);
+                    }
 
-break;
+                break;
     
-case 2: //Forwards
-digitalWrite(MotorLF,HIGH);
-digitalWrite(MotorLB,LOW);
-digitalWrite(MotorRF,HIGH);
-digitalWrite(MotorRB,LOW);
-analogWrite(pwmMotorR,Speed);
-analogWrite(pwmMotorL,Speed);
-    
-break;
-    
-case 3: //Backwards
-digitalWrite(MotorLF,LOW);
-digitalWrite(MotorLB,HIGH);
-digitalWrite(MotorRB,HIGH);
-digitalWrite(MotorRF,LOW);
-analogWrite(pwmMotorR,Speed);
-analogWrite(pwmMotorL,Speed);
+                case 2: //Forwards
+                    digitalWrite(MotorLF,HIGH);
+                    digitalWrite(MotorLB,LOW);
+                    digitalWrite(MotorRF,HIGH);
+                    digitalWrite(MotorRB,LOW);
+                    analogWrite(pwmMotorR,Speed);
+                    analogWrite(pwmMotorL,Speed);
 
-break;
+                break;
     
-case 4: // Turn Left
-digitalWrite(MotorLF,HIGH);
-digitalWrite(MotorLB,LOW);
-digitalWrite(MotorRB,HIGH);
-digitalWrite(MotorRF,LOW);
-analogWrite(pwmMotorR,Speed);
-analogWrite(pwmMotorL,Speed);
-    
-break;
-    
-case 5: //Turn Right
-digitalWrite(MotorLF,LOW);
-digitalWrite(MotorLB,HIGH);
-digitalWrite(MotorRB,LOW);
-digitalWrite(MotorRF,HIGH);
-analogWrite(pwmMotorL,Speed);
-analogWrite(pwmMotorR,Speed);
+                case 3: //Backwards
+                    digitalWrite(MotorLF,LOW);
+                    digitalWrite(MotorLB,HIGH);
+                    digitalWrite(MotorRB,HIGH);
+                    digitalWrite(MotorRF,LOW);
+                    analogWrite(pwmMotorR,Speed);
+                    analogWrite(pwmMotorL,Speed);
 
-break; 
-    
-case 6: // Stop
-analogWrite(pwmMotorR,Speed);
-digitalWrite(MotorLF,LOW);
-digitalWrite(MotorLB,LOW);
-digitalWrite(MotorRF,LOW);
-digitalWrite(MotorRB,LOW);
-analogWrite(pwmMotorL,Speed);
+                break;
 
-break;
-    
-case 7:// Fast
-Speed = 255;
-Serial.write(Speed);
+                case 4: // Turn Left
+                    digitalWrite(MotorLF,HIGH);
+                    digitalWrite(MotorLB,LOW);
+                    digitalWrite(MotorRB,HIGH);
+                    digitalWrite(MotorRF,LOW);
+                    analogWrite(pwmMotorR,Speed);
+                    analogWrite(pwmMotorL,Speed);
 
-break;
+                break;
     
-case 8:// Slow
-Speed = 75;
-Serial.write(Speed);
+                case 5: //Turn Right
+                    digitalWrite(MotorLF,LOW);
+                    digitalWrite(MotorLB,HIGH);
+                    digitalWrite(MotorRB,LOW);
+                    digitalWrite(MotorRF,HIGH);
+                    analogWrite(pwmMotorL,Speed);
+                    analogWrite(pwmMotorR,Speed);
 
-break;
+                break; 
     
-case 9:
-Speed = 150;
-Serial.write(Speed);
+                case 6: // Stop
+                    analogWrite(pwmMotorR,Speed);
+                    digitalWrite(MotorLF,LOW);
+                    digitalWrite(MotorLB,LOW);
+                    digitalWrite(MotorRF,LOW);
+                    digitalWrite(MotorRB,LOW);
+                    analogWrite(pwmMotorL,Speed);
 
-break;
+                break;
+
+                case 7:// Fast
+                    Speed = 255;
+                    Serial.write(Speed);
+
+                break;
+
+                case 8:// Slow
+                    Speed = 75;
+                    Serial.write(Speed);
+
+                break;
+    
+                case 9:
+                    Speed = 150;
+                    Serial.write(Speed);
+
+                break;
     
                 case 10:
                     if (distance < 20*cm) {  // This is where the LED On/Off happens
