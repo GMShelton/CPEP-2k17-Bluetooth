@@ -27,7 +27,7 @@ int Speed = 150;  //Defines the speed of the robot
 int cm = 1; // centimeters
 int in = cm/2.54; // inches
 int ft = in/12; // feet
-int Bord = 0;
+// int Bord = 0; // This is already defined in the foor loop within case 10
 
 
 void setup() {
@@ -155,7 +155,7 @@ void loop() {
                 break;
     
                 case 10:
-                    if (distance < 20*cm) {  // This is where the LED On/Off happens
+                    if (distance < 30*cm) {  // This is where the LED On/Off happens
                         
                         digitalWrite(MotorLF,LOW);
                         digitalWrite(MotorRF,LOW);
@@ -169,28 +169,34 @@ void loop() {
                     }
                 
                     else {
+                        for (var bord = 0; bord < 4; bord++) {
+                            // Moving forward
+                            digitalWrite(MotorLF,HIGH);
+                            digitalWrite(MotorLB,LOW);
+                            digitalWrite(MotorRF,HIGH);
+                            digitalWrite(MotorRB,LOW);
+                            analogWrite(pwmMotorR,255); 
+                            analogWrite(pwmMotorL,255);  
+
+                            delay(3000); // 3 seconds, delay is in milliseconds
+
+                            // Turning right
+                            digitalWrite(MotorLF,HIGH);
+                            digitalWrite(MotorLB,LOW);
+                            digitalWrite(MotorRF,LOW);
+                            digitalWrite(MotorRB,HIGH);
+                            analogWrite(pwmMotorR,255); 
+                            analogWrite(pwmMotorL,255);  
+
+                            delay(3000); // 3 seconds, delay is in milliseconds
+                          
+                        }
+                        /**
                       while (Bord < 4) {
-                        // Moving forward
-                        digitalWrite(MotorLF,HIGH);
-                        digitalWrite(MotorLB,LOW);
-                        digitalWrite(MotorRF,HIGH);
-                        digitalWrite(MotorRB,LOW);
-                        analogWrite(pwmMotorR,255); 
-                        analogWrite(pwmMotorL,255);  
 
-                        delay(3000); // 3 seconds, delay is in milliseconds
-
-                        // Turning right
-                        digitalWrite(MotorLF,HIGH);
-                        digitalWrite(MotorLB,LOW);
-                        digitalWrite(MotorRF,LOW);
-                        digitalWrite(MotorRB,HIGH);
-                        analogWrite(pwmMotorR,255); 
-                        analogWrite(pwmMotorL,255);  
-
-                        delay(3000); // 3 seconds, delay is in milliseconds
                         Bord += 1;    
-                      }                                    
+                      } 
+                        **/
                     }
                 
                     if (distance >= 200*cm || distance <= 0*cm){
@@ -207,7 +213,7 @@ void loop() {
                 break;
     
                 case 11:
-                    if (distance < 20*cm) {  // This is where the LED On/Off happens
+                    if (distance < 30*cm) {  // This is where the LED On/Off happens
                         
                         digitalWrite(MotorLF,LOW);
                         digitalWrite(MotorRF,LOW);
