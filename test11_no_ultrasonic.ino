@@ -24,10 +24,13 @@ byte cmd; // Stores the next byte of incoming data, which is a "command" to do s
 byte param; // Stores the 2nd byte, which is the command parameter
 
 int Speed = 150;  //Defines the speed of the robot
+
 int cm = 1; // centimeters
 int in = cm/2.54; // inches
 int ft = in/12; // feet
+
 // int Bord = 0; // This is already defined in the foor loop within case 10
+int c = 0;
 
 
 void setup() {
@@ -87,6 +90,7 @@ void loop() {
                 break;
     
                 case 2: //Forwards
+                    c = 2;
                     digitalWrite(MotorLF,HIGH);
                     digitalWrite(MotorLB,LOW);
                     digitalWrite(MotorRF,HIGH);
@@ -97,6 +101,7 @@ void loop() {
                 break;
     
                 case 3: //Backwards
+                    c = 3;
                     digitalWrite(MotorLF,LOW);
                     digitalWrite(MotorLB,HIGH);
                     digitalWrite(MotorRB,HIGH);
@@ -107,6 +112,7 @@ void loop() {
                 break;
 
                 case 4: // Turn Left
+                    c = 4;
                     digitalWrite(MotorLF,HIGH);
                     digitalWrite(MotorLB,LOW);
                     digitalWrite(MotorRB,HIGH);
@@ -117,6 +123,7 @@ void loop() {
                 break;
     
                 case 5: //Turn Right
+                    c = 5;
                     digitalWrite(MotorLF,LOW);
                     digitalWrite(MotorLB,HIGH);
                     digitalWrite(MotorRB,LOW);
@@ -127,6 +134,7 @@ void loop() {
                 break; 
     
                 case 6: // Stop
+                    c = 6;
                     analogWrite(pwmMotorR,Speed);
                     digitalWrite(MotorLF,LOW);
                     digitalWrite(MotorLB,LOW);
@@ -137,24 +145,29 @@ void loop() {
                 break;
 
                 case 7:// Fast
+                    c = 7;
                     Speed = 255;
                     Serial.write(Speed);
 
                 break;
 
                 case 8:// Slow
+                    c = 8;
                     Speed = 75;
                     Serial.write(Speed);
 
                 break;
     
                 case 9:
+                    c = 9;
                     Speed = 150;
                     Serial.write(Speed);
 
                 break;
     
                 case 10:
+                    c = 10;
+                    /**
                     if (distance < 30*cm) {  // This is where the LED On/Off happens
                         
                         digitalWrite(MotorLF,LOW);
@@ -165,7 +178,7 @@ void loop() {
                         digitalWrite(pwmMotorR,255);
                         
                         delay(1500); // added this so YOunity bot backs up a distance before continuing movement
-                      
+                    **/  
                     }
                 
                     else {
