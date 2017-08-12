@@ -257,6 +257,8 @@ void loop() {
                     }
                 
                         delay(500);                
+                    
+                break;                    
             
                     default: break; // do nothing
     
