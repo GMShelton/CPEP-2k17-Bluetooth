@@ -178,11 +178,11 @@ void loop() {
                         digitalWrite(pwmMotorR,255);
                         
                         delay(1500); // added this so YOunity bot backs up a distance before continuing movement
-                    **/  
+                      
                     }
-                
-                    else {
-                        for (var bord = 0; bord < 4; bord++) {
+                    **/
+                   // else {
+                     //   for (var bord = 0; bord < 4; bord++) {
                             // Moving forward
                             digitalWrite(MotorLF,HIGH);
                             digitalWrite(MotorLB,LOW);
@@ -203,14 +203,14 @@ void loop() {
 
                             delay(3000); // 3 seconds, delay is in milliseconds
                           
-                        }
+                    //    }
                         /**
                       while (Bord < 4) {
 
                         Bord += 1;    
                       } 
                         **/
-                    }
+                   // }
                 
                     if (distance >= 200*cm || distance <= 0*cm){
                         Serial.println("Out of range");
