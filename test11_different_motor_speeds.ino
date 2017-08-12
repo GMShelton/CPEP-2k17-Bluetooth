@@ -95,8 +95,8 @@ void loop() {
                     digitalWrite(MotorLB,LOW);
                     digitalWrite(MotorRF,HIGH);
                     digitalWrite(MotorRB,LOW);
-                    analogWrite(pwmMotorR,Speed);
-                    analogWrite(pwmMotorL,Speed);
+                    analogWrite(pwmMotorR,150);
+                    analogWrite(pwmMotorL,150);
 
                 break;
     
@@ -106,8 +106,8 @@ void loop() {
                     digitalWrite(MotorLB,HIGH);
                     digitalWrite(MotorRB,HIGH);
                     digitalWrite(MotorRF,LOW);
-                    analogWrite(pwmMotorR,Speed);
-                    analogWrite(pwmMotorL,Speed);
+                    analogWrite(pwmMotorR,150);
+                    analogWrite(pwmMotorL,150);
 
                 break;
 
@@ -117,8 +117,8 @@ void loop() {
                     digitalWrite(MotorLB,LOW);
                     digitalWrite(MotorRB,HIGH);
                     digitalWrite(MotorRF,LOW);
-                    analogWrite(pwmMotorR,Speed);
-                    analogWrite(pwmMotorL,Speed);
+                    analogWrite(pwmMotorR,150);
+                    analogWrite(pwmMotorL,150);
 
                 break;
     
@@ -128,19 +128,19 @@ void loop() {
                     digitalWrite(MotorLB,HIGH);
                     digitalWrite(MotorRB,LOW);
                     digitalWrite(MotorRF,HIGH);
-                    analogWrite(pwmMotorL,Speed);
-                    analogWrite(pwmMotorR,Speed);
+                    analogWrite(pwmMotorR,150);
+                    analogWrite(pwmMotorL,150);
 
                 break; 
     
                 case 6: // Stop
                     c = 6;
-                    analogWrite(pwmMotorR,Speed);
                     digitalWrite(MotorLF,LOW);
                     digitalWrite(MotorLB,LOW);
                     digitalWrite(MotorRF,LOW);
                     digitalWrite(MotorRB,LOW);
-                    analogWrite(pwmMotorL,Speed);
+                    analogWrite(pwmMotorR,150);                    
+                    analogWrite(pwmMotorL,150);
 
                 break;
 
@@ -165,100 +165,6 @@ void loop() {
 
                 break;
     
-                case 10:
-                    c = 10;
-                    /**
-                    if (distance < 30*cm) {  // This is where the LED On/Off happens
-                        
-                        digitalWrite(MotorLF,LOW);
-                        digitalWrite(MotorRF,LOW);
-                        digitalWrite(MotorLB,HIGH);
-                        digitalWrite(MotorRB,HIGH);
-                        digitalWrite(pwmMotorL,255);
-                        digitalWrite(pwmMotorR,255);
-                        
-                        delay(1500); // added this so YOunity bot backs up a distance before continuing movement
-                      
-                    }
-                    **/
-                   // else {
-                     //   for (var bord = 0; bord < 4; bord++) {
-                            // Moving forward
-                            digitalWrite(MotorLF,HIGH);
-                            digitalWrite(MotorLB,LOW);
-                            digitalWrite(MotorRF,HIGH);
-                            digitalWrite(MotorRB,LOW);
-                            analogWrite(pwmMotorR,255); 
-                            analogWrite(pwmMotorL,255);  
-
-                            delay(3000); // 3 seconds, delay is in milliseconds
-
-                            // Turning right
-                            digitalWrite(MotorLF,HIGH);
-                            digitalWrite(MotorLB,LOW);
-                            digitalWrite(MotorRF,LOW);
-                            digitalWrite(MotorRB,HIGH);
-                            analogWrite(pwmMotorR,255); 
-                            analogWrite(pwmMotorL,255);  
-
-                            delay(3000); // 3 seconds, delay is in milliseconds
-                          
-                    //    }
-                        /**
-                      while (Bord < 4) {
-
-                        Bord += 1;    
-                      } 
-                        **/
-                   // }
-                
-                    if (distance >= 200*cm || distance <= 0*cm){
-                        Serial.println("Out of range");
-                    }
-                
-                    else {
-                        Serial.print(distance);
-                        Serial.println("cm");
-                    }
-                
-                        delay(500);
-          
-                break;
-    
-                case 11:
-                    c = 11;
-                    if (distance < 30*cm) {  // This is where the LED On/Off happens
-                        
-                        digitalWrite(MotorLF,LOW);
-                        digitalWrite(MotorRF,LOW);
-                        digitalWrite(MotorLB,HIGH);
-                        digitalWrite(MotorRB,HIGH);
-                        
-                        delay(1000); // added this so YOunity bot backs up a distance before continuing movement 
-                      
-                    }
-                
-                    else {                     
-                        digitalWrite(MotorLF,LOW);
-                        digitalWrite(MotorLB,LOW);
-                        digitalWrite(MotorRF,LOW);
-                        digitalWrite(MotorRB,LOW);
-                        analogWrite(pwmMotorR,255); 
-                        analogWrite(pwmMotorL,255);                                                                
-                    }
-                
-                    if (distance >= 200*cm || distance <= 0*cm){
-                        Serial.println("Out of range");
-                    }
-                
-                    else {
-                        Serial.print(distance);
-                        Serial.println("cm");
-                    }
-                
-                        delay(500);                
-                    
-                break;                    
             
                     default: break; // do nothing
     
