@@ -167,7 +167,8 @@ void loop() {
                 break;
     
                 case 10:
-                    
+
+                    c = 10;                    
 
                     while (num < 4) {
                       
@@ -197,13 +198,16 @@ void loop() {
     
                 case 11:
 
-                digitalWrite(MotorLF, HIGH);
-                digitalWrite(MotorLB, LOW);
-                digitalWrite(MotorRF, HIGH);
-                digitalWrite(MotorRB, LOW);
-                analogWrite(pwmMotorR, 255);
-                analogWrite(pwmMotorL, 155);
-                                  
+                    c = 11;
+                    
+                    digitalWrite(MotorLF, HIGH);
+                    digitalWrite(MotorLB, LOW);
+                    digitalWrite(MotorRF, HIGH);
+                    digitalWrite(MotorRB, LOW);
+                    analogWrite(pwmMotorR, 255);
+                    analogWrite(pwmMotorL, 155);
+
+                break;                                  
             
                     default: break; // do nothing
     
