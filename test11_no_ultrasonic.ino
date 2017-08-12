@@ -170,7 +170,7 @@ void loop() {
 
                     c = 10;                    
 
-                    while (num < 4) {
+                    while (c == 10) {
                       
                       digitalWrite(MotorLF,HIGH);
                             digitalWrite(MotorLB,LOW);
