@@ -31,6 +31,7 @@ int ft = in/12; // feet
 
 // int Bord = 0; // This is already defined in the foor loop within case 10
 int c = 0;
+int num = 0;
 
 
 void setup() {
@@ -166,25 +167,11 @@ void loop() {
                 break;
     
                 case 10:
-                    c = 10;
-                    /**
-                    if (distance < 30*cm) {  // This is where the LED On/Off happens
-                        
-                        digitalWrite(MotorLF,LOW);
-                        digitalWrite(MotorRF,LOW);
-                        digitalWrite(MotorLB,HIGH);
-                        digitalWrite(MotorRB,HIGH);
-                        digitalWrite(pwmMotorL,255);
-                        digitalWrite(pwmMotorR,255);
-                        
-                        delay(1500); // added this so YOunity bot backs up a distance before continuing movement
+                    
+
+                    while (num < 4) {
                       
-                    }
-                    **/
-                   // else {
-                     //   for (var bord = 0; bord < 4; bord++) {
-                            // Moving forward
-                            digitalWrite(MotorLF,HIGH);
+                      digitalWrite(MotorLF,HIGH);
                             digitalWrite(MotorLB,LOW);
                             digitalWrite(MotorRF,HIGH);
                             digitalWrite(MotorRB,LOW);
@@ -202,64 +189,22 @@ void loop() {
                             analogWrite(pwmMotorL,255);  
 
                             delay(3000); // 3 seconds, delay is in milliseconds
-                          
-                    //    }
-                        /**
-                      while (Bord < 4) {
 
-                        Bord += 1;    
-                      } 
-                        **/
-                   // }
-                
-                    if (distance >= 200*cm || distance <= 0*cm){
-                        Serial.println("Out of range");
+                            num += 1;
                     }
-                
-                    else {
-                        Serial.print(distance);
-                        Serial.println("cm");
-                    }
-                
-                        delay(500);
-          
+                         
                 break;
     
                 case 11:
-                    c = 11;
-                    if (distance < 30*cm) {  // This is where the LED On/Off happens
-                        
-                        digitalWrite(MotorLF,LOW);
-                        digitalWrite(MotorRF,LOW);
-                        digitalWrite(MotorLB,HIGH);
-                        digitalWrite(MotorRB,HIGH);
-                        
-                        delay(1000); // added this so YOunity bot backs up a distance before continuing movement 
-                      
-                    }
-                
-                    else {                     
-                        digitalWrite(MotorLF,LOW);
-                        digitalWrite(MotorLB,LOW);
-                        digitalWrite(MotorRF,LOW);
-                        digitalWrite(MotorRB,LOW);
-                        analogWrite(pwmMotorR,255); 
-                        analogWrite(pwmMotorL,255);                                                                
-                    }
-                
-                    if (distance >= 200*cm || distance <= 0*cm){
-                        Serial.println("Out of range");
-                    }
-                
-                    else {
-                        Serial.print(distance);
-                        Serial.println("cm");
-                    }
-                
-                        delay(500);                
+
+                digitalWrite(MotorLF, HIGH);
+                digitalWrite(MotorLB, LOW);
+                digitalWrite(MotorRF, HIGH);
+                digitalWrite(MotorRB, LOW);
+                analogWrite(pwmMotorR, 255);
+                analogWrite(pwmMotorL, 155);
+                                  
             
-                break;
-                    
                     default: break; // do nothing
     
                 } // switch (param)
