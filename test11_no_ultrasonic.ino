@@ -226,6 +226,7 @@ void loop() {
                 break;
     
                 case 11:
+                    c = 11;
                     if (distance < 30*cm) {  // This is where the LED On/Off happens
                         
                         digitalWrite(MotorLF,LOW);
