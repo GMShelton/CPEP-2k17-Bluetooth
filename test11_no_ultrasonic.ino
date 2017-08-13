@@ -34,6 +34,27 @@ int c = 0;
 int num = 0;
 
 
+void square() {
+    digitalWrite(MotorLF,HIGH);
+    digitalWrite(MotorLB,LOW);
+    digitalWrite(MotorRF,HIGH);
+    digitalWrite(MotorRB,LOW);
+    analogWrite(pwmMotorR,255); 
+    analogWrite(pwmMotorL,255);  
+
+    delay(3000); // 3 seconds, delay is in milliseconds
+
+    // Turning right
+    digitalWrite(MotorLF,HIGH);
+    digitalWrite(MotorLB,LOW);
+    digitalWrite(MotorRF,LOW);
+    digitalWrite(MotorRB,HIGH);
+    analogWrite(pwmMotorR,255); 
+    analogWrite(pwmMotorL,255);  
+
+    delay(3000); // 3 seconds, delay is in milliseconds
+}
+
 void setup() {
     // put your setup code here, to run once:
 
@@ -167,31 +188,15 @@ void loop() {
                 break;
     
                 case 10:
-
                     c = 10;                    
-
-                    while (c == 10) {
-                      
-                      digitalWrite(MotorLF,HIGH);
-                            digitalWrite(MotorLB,LOW);
-                            digitalWrite(MotorRF,HIGH);
-                            digitalWrite(MotorRB,LOW);
-                            analogWrite(pwmMotorR,255); 
-                            analogWrite(pwmMotorL,255);  
-
-                            delay(3000); // 3 seconds, delay is in milliseconds
-
-                            // Turning right
-                            digitalWrite(MotorLF,HIGH);
-                            digitalWrite(MotorLB,LOW);
-                            digitalWrite(MotorRF,LOW);
-                            digitalWrite(MotorRB,HIGH);
-                            analogWrite(pwmMotorR,255); 
-                            analogWrite(pwmMotorL,255);  
-
-                            delay(3000); // 3 seconds, delay is in milliseconds
-
-                            num += 1;
+                    square();
+                    delay(50);
+                    square();
+                    delay(50);     
+                    square();
+                    delay(50);                    
+                    square();
+                    delay(50);                    
                     }
                          
                 break;
