@@ -53,6 +53,14 @@ void square() {
     analogWrite(pwmMotorL,255);  
 
     delay(3000); // 3 seconds, delay is in milliseconds
+
+    digitalWrite(MotorLF,LOW);
+    digitalWrite(MotorLB,LOW);
+    digitalWrite(MotorRF,LOW);
+    digitalWrite(MotorRB,LOW);
+    analogWrite(pwmMotorR,255); 
+    analogWrite(pwmMotorL,255);  
+    delay(50);
 }
 
 void setup() {
@@ -188,7 +196,8 @@ void loop() {
                 break;
     
                 case 10:
-                    c = 10;                    
+                    c = 10;
+                     Serial.write(1);                      
                     square();
                     delay(50);
                     square();
@@ -196,9 +205,8 @@ void loop() {
                     square();
                     delay(50);                    
                     square();
-                    Serial.write(1);
-                    delay(30000);                    
-                    }
+                         
+                    
                          
                 break;
     
@@ -211,15 +219,15 @@ void loop() {
                     digitalWrite(MotorRF, HIGH);
                     digitalWrite(MotorRB, LOW);
                     analogWrite(pwmMotorR, 255);
-                    analogWrite(pwmMotorL, 155);
+                    analogWrite(pwmMotorL, 100);
 
                 break;                                  
             
                     default: break; // do nothing
-    
+            
                 } // switch (param)
 
-                
+            }     
   
             } // switch (cmd) case 1
     
