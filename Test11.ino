@@ -244,7 +244,7 @@ void loop() {
                 
                         delay(500);                
             
-                    default: break; // do nothing
+                break; // do nothing
     
                 } // switch (param)
   
