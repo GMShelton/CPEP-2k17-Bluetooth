@@ -213,8 +213,7 @@ void loop() {
                     analogWrite(pwmMotorL, 155);
 
                 break;                                  
-           
-    
+               
                 } // switch (param)
   
             } // switch (cmd) case 1
