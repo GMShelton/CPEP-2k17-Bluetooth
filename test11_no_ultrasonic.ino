@@ -196,7 +196,7 @@ void loop() {
                     square();
                     delay(50);                    
                     square();
-                    delay(50);                    
+                    delay(30000);                    
                     }
                          
                 break;
