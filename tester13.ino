@@ -179,7 +179,7 @@ void loop() {
 
                 break;
 
-                case 4: // Turn Left
+                case 4: // Turn Right
                     c = 4;
                     digitalWrite(MotorLF,HIGH);
                     digitalWrite(MotorLB,LOW);
@@ -190,7 +190,7 @@ void loop() {
 
                 break;
     
-                case 5: //Turn Right
+                case 5: //Turn Left
                     c = 5;
                     digitalWrite(MotorLF,LOW);
                     digitalWrite(MotorLB,HIGH);
