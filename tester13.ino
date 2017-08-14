@@ -32,36 +32,7 @@ int ft = in/12; // feet
 // int Bord = 0; // This is already defined in the foor loop within case 10
 int c = 0;
 int num = 0;
-
-
-void square() {
-    digitalWrite(MotorLF,HIGH);
-    digitalWrite(MotorLB,LOW);
-    digitalWrite(MotorRF,HIGH);
-    digitalWrite(MotorRB,LOW);
-    analogWrite(pwmMotorR,255); 
-    analogWrite(pwmMotorL,255);  
-
-    delay(3000); // 3 seconds, delay is in milliseconds
-
-    // Turning right
-    digitalWrite(MotorLF,HIGH);
-    digitalWrite(MotorLB,LOW);
-    digitalWrite(MotorRF,LOW);
-    digitalWrite(MotorRB,HIGH);
-    analogWrite(pwmMotorR,255); 
-    analogWrite(pwmMotorL,255);  
-
-    delay(3000); // 3 seconds, delay is in milliseconds
-
-    digitalWrite(MotorLF,LOW);
-    digitalWrite(MotorLB,LOW);
-    digitalWrite(MotorRF,LOW);
-    digitalWrite(MotorRB,LOW);
-    analogWrite(pwmMotorR,255); 
-    analogWrite(pwmMotorL,255);  
-    delay(50);
-}
+int startOver = 1;
 
 void ultraSonic() {
 
@@ -80,6 +51,7 @@ void ultraSonic() {
     digitalWrite(MotorRF,LOW);
     digitalWrite(MotorLB,LOW);
     digitalWrite(MotorRB,LOW);
+    startOver = 2;
   
 }
   else {
@@ -89,6 +61,41 @@ void ultraSonic() {
     digitalWrite(MotorRB,LOW);
     digitalWrite(MotorLB,LOW);
   }
+}
+
+void square() {
+  startOver = 1;
+  while (startOver == 1) {
+    digitalWrite(MotorLF,HIGH);
+    digitalWrite(MotorLB,LOW);
+    digitalWrite(MotorRF,HIGH);
+    digitalWrite(MotorRB,LOW);
+    analogWrite(pwmMotorR,255); 
+    analogWrite(pwmMotorL,255);
+    ultraSonic();  
+
+    delay(3000); // 3 seconds, delay is in milliseconds
+
+    // Turning right
+    digitalWrite(MotorLF,HIGH);
+    digitalWrite(MotorLB,LOW);
+    digitalWrite(MotorRF,LOW);
+    digitalWrite(MotorRB,HIGH);
+    analogWrite(pwmMotorR,255); 
+    analogWrite(pwmMotorL,255);
+    ultraSonic();  
+
+    delay(3000); // 3 seconds, delay is in milliseconds
+
+    digitalWrite(MotorLF,LOW);
+    digitalWrite(MotorLB,LOW);
+    digitalWrite(MotorRF,LOW);
+    digitalWrite(MotorRB,LOW);
+    analogWrite(pwmMotorR,255); 
+    analogWrite(pwmMotorL,255);
+    ultraSonic();  
+    delay(50);
+}
 }
 
 
@@ -172,7 +179,7 @@ void loop() {
 
                 break;
 
-                case 4: // Turn Right
+                case 4: // Turn Left
                     c = 4;
                     digitalWrite(MotorLF,HIGH);
                     digitalWrite(MotorLB,LOW);
@@ -183,7 +190,7 @@ void loop() {
 
                 break;
     
-                case 5: //Turn Left
+                case 5: //Turn Right
                     c = 5;
                     digitalWrite(MotorLF,LOW);
                     digitalWrite(MotorLB,HIGH);
@@ -228,8 +235,7 @@ void loop() {
     
                 case 10:
                     c = 10;
-                     Serial.write(1); 
-                    ultraSonic();                     
+                     Serial.write(1);                     
                     square();
                     delay(50);
                     square();
@@ -237,9 +243,7 @@ void loop() {
                     square();
                     delay(50);                    
                     square();
-                         
-                    
-                         
+              
                 break;
     
                 case 11:
