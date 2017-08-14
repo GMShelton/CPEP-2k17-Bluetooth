@@ -261,13 +261,11 @@ void loop() {
             
                     default: break; // do nothing
             
-                } // switch (param)
-
-            }     
+                } // switch (param)  
   
             } // switch (cmd) case 1
     
-     // switch (cmd)
+        } // switch (cmd)
 
     delay(READ_RATE); // wait 100ms for next readin
 
