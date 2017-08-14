@@ -86,6 +86,16 @@ void loop() {
     duration = pulseIn(echoPin, HIGH);
     distance = (duration/2) / 29.1;
   
+    
+    /**
+    
+    if (cmd.param == case 1)
+    if (cmd(param) == case 1)
+    
+    
+    
+    **/
+    
         if ( Serial.available() ) // if data is available to read
         {
         cmd = Serial.read(); // read it and store it in 'cmd'
