@@ -52,20 +52,14 @@ void ultraSonic() {
     digitalWrite(MotorLB,LOW);
     digitalWrite(MotorRB,LOW);
     startOver = 0;
-  
-}
-  else {
-    
-    digitalWrite(MotorLF,HIGH);
-    digitalWrite(MotorRF,HIGH);
-    digitalWrite(MotorRB,LOW);
-    digitalWrite(MotorLB,LOW);
+    delay(2000);
+
   }
 }
 
 void square() {
    if (startOver <= 4) {
-    ultraSonic(); 
+    
      //Fast
     digitalWrite(MotorLF,HIGH);
     digitalWrite(MotorLB,LOW);
@@ -73,28 +67,28 @@ void square() {
     digitalWrite(MotorRB,LOW);
     analogWrite(pwmMotorR,255); 
     analogWrite(pwmMotorL,255); 
-
+    ultraSonic(); 
     delay(3000); // 3 seconds, delay is in milliseconds
 
     // Turning right
-    ultraSonic(); 
+    
     digitalWrite(MotorLF,HIGH);
     digitalWrite(MotorLB,LOW);
     digitalWrite(MotorRF,LOW);
     digitalWrite(MotorRB,HIGH);
     analogWrite(pwmMotorR,255); 
     analogWrite(pwmMotorL,255);
-   
+    ultraSonic(); 
     delay(3000); // 3 seconds, delay is in milliseconds
 
-    ultraSonic(); 
+    
     digitalWrite(MotorLF,LOW);
     digitalWrite(MotorLB,LOW);
     digitalWrite(MotorRF,LOW);
     digitalWrite(MotorRB,LOW);
     analogWrite(pwmMotorR,255); 
     analogWrite(pwmMotorL,255);
-   
+    ultraSonic(); 
     delay(50);
      startOver +=1;
 }
@@ -240,13 +234,17 @@ void loop() {
                     Serial.write(1); 
                     startOver = 0;                    
                     square();
+                    
                     delay(50);
                     square();
+                    
                     delay(50);     
                     square();
+                    
                     delay(50);                    
                     square();
-                    startOver = 0;
+                    ultraSonic();
+                    
               
                 break;
     
