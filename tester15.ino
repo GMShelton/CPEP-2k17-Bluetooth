@@ -65,18 +65,19 @@ void ultraSonic() {
 
 void square() {
    if (startOver <= 4) {
+    ultraSonic(); 
+     //Fast
     digitalWrite(MotorLF,HIGH);
     digitalWrite(MotorLB,LOW);
     digitalWrite(MotorRF,HIGH);
     digitalWrite(MotorRB,LOW);
     analogWrite(pwmMotorR,255); 
-    analogWrite(pwmMotorL,255);
-  
-    ultraSonic();  
+    analogWrite(pwmMotorL,255); 
 
     delay(3000); // 3 seconds, delay is in milliseconds
 
     // Turning right
+    ultraSonic(); 
     digitalWrite(MotorLF,HIGH);
     digitalWrite(MotorLB,LOW);
     digitalWrite(MotorRF,LOW);
@@ -84,18 +85,16 @@ void square() {
     analogWrite(pwmMotorR,255); 
     analogWrite(pwmMotorL,255);
    
-    ultraSonic();  
-
     delay(3000); // 3 seconds, delay is in milliseconds
 
+    ultraSonic(); 
     digitalWrite(MotorLF,LOW);
     digitalWrite(MotorLB,LOW);
     digitalWrite(MotorRF,LOW);
     digitalWrite(MotorRB,LOW);
     analogWrite(pwmMotorR,255); 
     analogWrite(pwmMotorL,255);
-  
-    ultraSonic(); 
+   
     delay(50);
      startOver +=1;
 }
