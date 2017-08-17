@@ -33,6 +33,7 @@ int ft = in/12; // feet
 int c = 0;
 int num = 0;
 int startOver = 0;
+int startOverCircle = 0;
 
 void ultraSonic() {
 
@@ -100,6 +101,7 @@ void square() {
 }
 
 void circle() {
+  if (startOverCircle <= 4);
 digitalWrite(MotorLF, HIGH);
 digitalWrite(MotorLB, LOW);
 digitalWrite(MotorRF, HIGH);
@@ -116,6 +118,7 @@ analogWrite(pwmMotorR, 255);
 analogWrite(pwmMotorL, 100);
 ultraSonic();
 delay(3000);
+  startOverCircle += 1;
 }
 
 
