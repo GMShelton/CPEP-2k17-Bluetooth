@@ -57,6 +57,11 @@ void ultraSonic() {
     digitalWrite(MotorRF,LOW);
     digitalWrite(MotorLB,HIGH);
     digitalWrite(MotorRB,HIGH);
+    delay(1000);
+     digitalWrite(MotorLF,LOW);
+    digitalWrite(MotorRF,LOW);
+    digitalWrite(MotorLB,LOW);
+    digitalWrite(MotorRB,LOW);
     startOver = 0;
     delay(2000);
 
