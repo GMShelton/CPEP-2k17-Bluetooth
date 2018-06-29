@@ -1,3 +1,34 @@
+/*
+  edits made as of 6/28:
+  - split function "ultrasonic" into functions "ultrasonic" and "ultrasonicAction"
+  - moved distance and duration to be global variables, and stated and define each separately
+  - left the code operating ultrasonic in function "ultrasonic" and moved the if statement to stop movement into "ultrasonicAction"
+
+
+  noticed that each time the collisionavodiance button is pressed (whether to turn on or off) the younity bot would act as if
+  it had just been turned on. maybe is has something to do with the way cases are stored and saved
+
+  // wait, if speed never equal 0 gotta find another way
+
+  6/29 edits:
+- wrote code that sends out a string if the motors aren't spinning or the speed is 0, and another string otherwise.
+  
+  - wrote code on app inventor side to break out of case 12 and the ultrasonic when the directional buttons were pressed. (will later want to
+  disable this breakout from each event handler when the button is clicked, so that ultrasonic can be active and stop a "reckless driver"
+
+EDIT NEXT: 
+- PUT TEXT IN APP INVENTOR TO READ THE VALUE OF INCREMENTOR (to see if its changing, and if so, why it has no effect on the US if statement)
+- also search for youtube videos of how to send an unsigned one byte number to app using HC06
+- also search arduino reference on how to make functions with parameters
+
+(if time)
+- look at the comments for byte to get speed to change independently of directions
+- find out how to cause buttons in app to revert to look as if they were never pressed when they are pressed again. 
+  (this will allow for current spee din app to be indicated by button color change rather than text)
+
+
+*/
+
 // Changing that Tx and Rx
 #include <SoftwareSerial.h>
 SoftwareSerial mySerial(11, 12);
@@ -38,6 +69,7 @@ byte cmd; // Stores the next byte of incoming data, which is a "command" to do s
 byte param; // Stores the 2nd byte, which is the command parameter
 
 int Speed = 150;  //Defines the speed of the robot
+int incrementForTest = 0;
 
 int cm = 1; // centimeters
 int in = cm / 2.54; // inches
@@ -124,31 +156,48 @@ void stopped() {
 }
 
 
+// duration, distance;
+long duration = pulseIn(echoPin, HIGH);
+long distance = (duration / 2) / 29.1;
+
+// there should be a way that when a button is pressed within the app, it sends a byte or
+// line that when it is read, it continually turns on the ultrasonic through each iteration of void loop
+
+
+// split these in two separate US functions so that one could run indepedently of the other
 
 void ultraSonic() {
 
-  long duration, distance;
   digitalWrite(trigPin, LOW);  // Added this line
   delayMicroseconds(2); // Added this line
   digitalWrite(trigPin, HIGH);
   //  delayMicroseconds(1000); - Removed this line
   delayMicroseconds(10); // Added this line
   digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH);
-  distance = (duration / 2) / 29.1;
-  if (distance < 20 * cm) { // This is where the LED On/Off happens
+
+}
+
+void ultraSonicAction() {
+  /* when the condition in the if statement was replace with 1 == 0 (a condition that is always false) the US code
+    did not run when the US button on the app was pressed. This indicates that the condition of distance < 20 * cm is
+    always reading true for some reason. What can be tried is an incrementing variable, and when the incrementing variable
+    gets larger than a certain value and the button is held down, trigger US
+
+  */
+  incrementForTest += 1;
+  delay(1000); //( 1 / (READ_RATE / 1000));
+  if (incrementForTest >= 20) {//(distance < 20 * cm) { // This is where the LED On/Off happens
     // When the Red condition is met, the Green LED should turn off
     stopped();
     delay(1000);
     backward();
     delay(200);
     stopped();
-    startOver = 0;
+    // startOver = 0;
     delay(2000);
 
   }
 }
-
 
 void ultraSonicMaze() {
 
@@ -338,8 +387,17 @@ void setup() {
 
 void loop() {
 
+  if (Speed == 0 || (digitalRead(MotorLF) == LOW && digitalRead(MotorLB) == LOW && digitalRead(MotorRF) == LOW && digitalRead(MotorRB) == LOW) ) {
+
+    //String speedCheck = String(Speed);
+    Serial.print("forUS"); // sends to the companion app the speed value of the motors
+  } else {
+    Serial.print("reg"); // sends to the companion app the speed value of the motors
+  }
+
+
   float distPerSec = wheelDiam * PI * (rpm / 60);
-  
+
   /* already part of ultrasonic code
     long duration, distance;
     digitalWrite(trigPin, LOW);  // Added this line
@@ -365,8 +423,39 @@ void loop() {
   if ( Serial.available() ) // if data is available to read
   {
     cmd = Serial.read(); // read it and store it in 'cmd'
-    // Data format is byte 1 = command, byte 2 = parameter, byte 3 = speedParam
+    // Data format is byte 1 = command, byte 2 = parameter
   };
+
+
+  /* This acts like a nest. When the app sends the first byte, it stores it as cmd and switches in cmd. The first byte containing 1
+    causes it to run the first (and only) case in switch (cmd). Within this case, the second byte is stored as param and then switches
+    in param with all the familiar cases for control
+
+
+    tests:
+
+    comment out the inner case 1 and see how that affects functionality of the code. Do the same with 2-5
+
+    the only thing the outer case 1 is about is reading the 2nd byte and going into swithcing between cases for that
+
+    thats why the byte sequences:
+    1,2 for forward
+    1,3 for backward
+    1,6 for stop
+    1,7 for fast
+
+    after sending the 1 for the first byte, the code enter the switching for param. What if an outer case 2 were created to change speed?
+    1,2 forward
+    2,1 slow
+    2,2 medium
+    2,3 fast
+
+    by copying the content in outer case 1 and pssting that next to it in the code (renaming it case 2) and keeping cases only for speed,
+    speed and direction should be able to be controlled independenttly without needed code to switch in app inventor.
+    Though in the second outer case should rename the param variable as speedParam or something different
+
+  */
+
   switch (cmd) {
     case 1:
       // First byte contains a generic "command" byte. We arbitrarily defined '1' as the command to then check the 2nd parameter byte
@@ -465,11 +554,19 @@ void loop() {
             break;
 
           case 12:
-            forward();
+            //forward();
             //digitalWrite(MotorLF, HIGH);
             //digitalWrite(MotorRF, HIGH);
             ultraSonic();
+            ultraSonicAction();
             //delay(10000);
+
+            // because the read rate is 100 ms, I want to make this 1 second (10x read rate). But I want this 1 second regardless of the read rate
+            // READ_RATE/1000 gets the length of time of readrate in seconds, while 1/(READ_RATE/1000) gets the multiplier one must multiply by to ensure
+            // that a process is 1 second long
+
+
+
             break;
 
 
