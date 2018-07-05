@@ -11,19 +11,19 @@
   // wait, if speed never equal 0 gotta find another way
 
   6/29 edits:
-- wrote code that sends out a string if the motors aren't spinning or the speed is 0, and another string otherwise.
-  
+  - wrote code that sends out a string if the motors aren't spinning or the speed is 0, and another string otherwise.
+
   - wrote code on app inventor side to break out of case 12 and the ultrasonic when the directional buttons were pressed. (will later want to
   disable this breakout from each event handler when the button is clicked, so that ultrasonic can be active and stop a "reckless driver"
 
-EDIT NEXT: 
-- PUT TEXT IN APP INVENTOR TO READ THE VALUE OF INCREMENTOR (to see if its changing, and if so, why it has no effect on the US if statement)
-- also search for youtube videos of how to send an unsigned one byte number to app using HC06
-- also search arduino reference on how to make functions with parameters
+  EDIT NEXT:
+  - PUT TEXT IN APP INVENTOR TO READ THE VALUE OF INCREMENTOR (to see if its changing, and if so, why it has no effect on the US if statement)
+  - also search for youtube videos of how to send an unsigned one byte number to app using HC06
+  - also search arduino reference on how to make functions with parameters
 
-(if time)
-- look at the comments for byte to get speed to change independently of directions
-- find out how to cause buttons in app to revert to look as if they were never pressed when they are pressed again. 
+  (if time)
+  - look at the comments for byte to get speed to change independently of directions
+  - find out how to cause buttons in app to revert to look as if they were never pressed when they are pressed again.
   (this will allow for current spee din app to be indicated by button color change rather than text)
 
 
@@ -55,8 +55,8 @@ SoftwareSerial mySerial(11, 12);
 #define MotorLF 5
 
 
-#define trigPin 12
-#define echoPin 11
+#define trigPin 11
+#define echoPin 12
 #define USGnd 4
 #define USVcc 3
 
@@ -114,7 +114,6 @@ void forward() {
 
 }
 
-
 void backward() {
   digitalWrite(MotorLF, LOW);
   digitalWrite(MotorLB, HIGH);
@@ -155,27 +154,44 @@ void stopped() {
 
 }
 
-
-// duration, distance;
-long duration = pulseIn(echoPin, HIGH);
-long distance = (duration / 2) / 29.1;
-
-// there should be a way that when a button is pressed within the app, it sends a byte or
-// line that when it is read, it continually turns on the ultrasonic through each iteration of void loop
-
+// Got Ultrasonic to continually give reading (called in loop, defined trig and echo pins correctly)
 
 // split these in two separate US functions so that one could run indepedently of the other
 
+unsigned long duration;
+long distance;
+
 void ultraSonic() {
 
+  // long duration, distance;
   digitalWrite(trigPin, LOW);  // Added this line
   delayMicroseconds(2); // Added this line
   digitalWrite(trigPin, HIGH);
-  //  delayMicroseconds(1000); - Removed this line
+
   delayMicroseconds(10); // Added this line
   digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH); //, 10 * 1000000); // 10 seconds
+  distance = (duration / 2) / 29.1;
 
 }
+
+
+void newUltraSonicAction() {
+
+  if (distance > 30 * cm) {
+    Serial.print("dist: is over 30 cm");
+  }
+
+  if (distance <= 30 * cm && distance > 0 * cm) { // This is where the LED On/Off happens
+    Serial.print("dist: " + String(distance) + " cm");
+  }
+
+  if (distance == 0 * cm) { // This is where the LED On/Off happens
+    Serial.print("probably not working");
+  }
+
+}
+
 
 void ultraSonicAction() {
   /* when the condition in the if statement was replace with 1 == 0 (a condition that is always false) the US code
@@ -387,29 +403,20 @@ void setup() {
 
 void loop() {
 
-  if (Speed == 0 || (digitalRead(MotorLF) == LOW && digitalRead(MotorLB) == LOW && digitalRead(MotorRF) == LOW && digitalRead(MotorRB) == LOW) ) {
+  ultraSonic();
+  newUltraSonicAction();
+  delay(300); /* delay neeeded so the current data sent doesn't interrupt the last data sent and print something like "dist: 30cdist: 20cm:" instead of "dist: 20 cm" */
+  /*
+    if (Speed == 0 || (digitalRead(MotorLF) == LOW && digitalRead(MotorLB) == LOW && digitalRead(MotorRF) == LOW && digitalRead(MotorRB) == LOW) ) {
 
-    //String speedCheck = String(Speed);
-    Serial.print("forUS"); // sends to the companion app the speed value of the motors
-  } else {
-    Serial.print("reg"); // sends to the companion app the speed value of the motors
-  }
-
-
-  float distPerSec = wheelDiam * PI * (rpm / 60);
-
-  /* already part of ultrasonic code
-    long duration, distance;
-    digitalWrite(trigPin, LOW);  // Added this line
-    delayMicroseconds(2); // Added this line
-    digitalWrite(trigPin, HIGH);
-
-    delayMicroseconds(10); // Added this line
-    digitalWrite(trigPin, LOW);
-    duration = pulseIn(echoPin, HIGH);
-    distance = (duration / 2) / 29.1;
+      String speedCheck = String(Speed);
+         Serial.print("forUS"); // sends to the companion app the speed value of the motors
+    } else {
+       Serial.print("reg"); // sends to the companion app the speed value of the motors
+    }
   */
 
+  float distPerSec = wheelDiam * PI * (rpm / 60);
 
   if (Speed == 75) {
     rpm = (83 / 59.6) * 60;
@@ -557,7 +564,7 @@ void loop() {
             //forward();
             //digitalWrite(MotorLF, HIGH);
             //digitalWrite(MotorRF, HIGH);
-            ultraSonic();
+            //  ultraSonic();
             ultraSonicAction();
             //delay(10000);
 
