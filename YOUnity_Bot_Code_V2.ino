@@ -222,21 +222,8 @@ void usAction() {
 
 void ultraSonicMaze() {
 
-  long duration, distance;
-  digitalWrite(trigPin, LOW);  // Added this line
-  delayMicroseconds(2); // Added this line
-  digitalWrite(trigPin, HIGH);
-  //  delayMicroseconds(1000); - Removed this line
-  delayMicroseconds(10); // Added this line
-  digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH);
-  distance = (duration / 2) / 29.1;
-
-
-  if (distance < 10 * cm) { // This is where the LED On/Off happens
-    // When the Red condition is met, the Green LED should turn off
-    //left();
-
+  if (distance < 10 * cm) {
+    
     if (nextStep == 1) {
       stopped();
       delay(1000 * 5);
