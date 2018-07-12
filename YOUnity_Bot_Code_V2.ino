@@ -176,7 +176,7 @@ void ultraSonic() {
 }
 
 
-void newUltraSonicAction() {
+void distanceSensor() {
 
   if (distance > 30 * cm) {
     Serial.print("dist: is over 30 cm");
@@ -192,17 +192,23 @@ void newUltraSonicAction() {
 
 }
 
+void usTrig() {
+    if (distance <= 7 * cm) {
+         Serial.print("trig"); // sends to the companion app the speed value of the motors
+      } else {
+         Serial.print("test"); // sends to the companion app the speed value of the motors
+        }
 
-void ultraSonicAction() {
+  }
+
+void usAction() {
   /* when the condition in the if statement was replace with 1 == 0 (a condition that is always false) the US code
     did not run when the US button on the app was pressed. This indicates that the condition of distance < 20 * cm is
     always reading true for some reason. What can be tried is an incrementing variable, and when the incrementing variable
     gets larger than a certain value and the button is held down, trigger US
 
   */
-  incrementForTest += 1;
-  delay(1000); //( 1 / (READ_RATE / 1000));
-  if (incrementForTest >= 20) {//(distance < 20 * cm) { // This is where the LED On/Off happens
+
     // When the Red condition is met, the Green LED should turn off
     stopped();
     delay(1000);
@@ -212,7 +218,6 @@ void ultraSonicAction() {
     // startOver = 0;
     delay(2000);
 
-  }
 }
 
 void ultraSonicMaze() {
@@ -287,39 +292,6 @@ void ultraSonicMaze() {
   //forward();
   //}
 
-}
-
-void ultraSonic2() {
-
-  long duration, distance;
-  digitalWrite(trigPin, LOW);  // Added this line
-  delayMicroseconds(2); // Added this line
-  digitalWrite(trigPin, HIGH);
-  //  delayMicroseconds(1000); - Removed this line
-  delayMicroseconds(10); // Added this line
-  digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH);
-  distance = (duration / 2) / 29.1;
-  if (distance < 30 * cm) { // This is where the LED On/Off happens
-    // When the Red condition is met, the Green LED should turn off
-    stopped();
-    delay(1000);
-    /*
-      digitalWrite(MotorLF,LOW);
-      digitalWrite(MotorRF,LOW);
-      digitalWrite(MotorLB,HIGH);
-      digitalWrite(MotorRB,HIGH);
-      delay(1000);
-      digitalWrite(MotorLF,LOW);
-      digitalWrite(MotorRF,LOW);
-      digitalWrite(MotorLB,LOW);
-      digitalWrite(MotorRB,LOW);
-      startOver = 0;
-      delay(2000);
-      Speed = 0;
-      Serial.write(Speed);
-    */
-  }
 }
 
 
@@ -404,7 +376,8 @@ void setup() {
 void loop() {
 
   ultraSonic();
-  newUltraSonicAction();
+//  usTrig();  // should only be called in case 12
+ // distanceSensor();
   delay(300); /* delay neeeded so the current data sent doesn't interrupt the last data sent and print something like "dist: 30cdist: 20cm:" instead of "dist: 20 cm" */
   /*
     if (Speed == 0 || (digitalRead(MotorLF) == LOW && digitalRead(MotorLB) == LOW && digitalRead(MotorRF) == LOW && digitalRead(MotorRB) == LOW) ) {
@@ -565,7 +538,7 @@ void loop() {
             //digitalWrite(MotorLF, HIGH);
             //digitalWrite(MotorRF, HIGH);
             //  ultraSonic();
-            ultraSonicAction();
+            usTrig();
             //delay(10000);
 
             // because the read rate is 100 ms, I want to make this 1 second (10x read rate). But I want this 1 second regardless of the read rate
@@ -585,6 +558,10 @@ void loop() {
 
             break;
 
+          case 14:
+            usAction();
+
+            break;
 
           default: break; // do nothing
 
