@@ -1,32 +1,19 @@
 /*
-  edits made as of 6/28:
-  - split function "ultrasonic" into functions "ultrasonic" and "ultrasonicAction"
-  - moved distance and duration to be global variables, and stated and define each separately
-  - left the code operating ultrasonic in function "ultrasonic" and moved the if statement to stop movement into "ultrasonicAction"
-
-
-  noticed that each time the collisionavodiance button is pressed (whether to turn on or off) the younity bot would act as if
-  it had just been turned on. maybe is has something to do with the way cases are stored and saved
-
-  // wait, if speed never equal 0 gotta find another way
-
-  6/29 edits:
-  - wrote code that sends out a string if the motors aren't spinning or the speed is 0, and another string otherwise.
-
-  - wrote code on app inventor side to break out of case 12 and the ultrasonic when the directional buttons were pressed. (will later want to
-  disable this breakout from each event handler when the button is clicked, so that ultrasonic can be active and stop a "reckless driver"
-
   EDIT NEXT:
-  - PUT TEXT IN APP INVENTOR TO READ THE VALUE OF INCREMENTOR (to see if its changing, and if so, why it has no effect on the US if statement)
   - also search for youtube videos of how to send an unsigned one byte number to app using HC06
   - also search arduino reference on how to make functions with parameters
 
   (if time)
   - look at the comments for byte to get speed to change independently of directions
   - find out how to cause buttons in app to revert to look as if they were never pressed when they are pressed again.
-  (this will allow for current spee din app to be indicated by button color change rather than text)
+  (this will allow for current speed in app to be indicated by button color change rather than text)
 
 
+  Notes:
+
+  The reason why the variable Speed has the first letter captilaized is that having the variable name all lowercase
+  may interfere with an existing thing in Arduino code
+  
 */
 
 // Changing that Tx and Rx
@@ -193,37 +180,33 @@ void distanceSensor() {
 }
 
 void usTrig() {
-    if (distance <= 7 * cm) {
-         Serial.print("trig"); // sends to the companion app the speed value of the motors
-      } else {
+  if (distance <= 7 * cm) {
+     Serial.print("ggggg"); // trigger text to app (option 1 for stopping YOUnity Bot)
+    //  stopped(); // call stop function (option 2 for stopping YOUnity Bot)
+    //  Speed = 0; // set speed to 0 (option 3 for stopping YOUnity Bot)
+  } /*else {
          Serial.print("test"); // sends to the companion app the speed value of the motors
-        }
+        }*/
 
-  }
+}
 
 void usAction() {
-  /* when the condition in the if statement was replace with 1 == 0 (a condition that is always false) the US code
-    did not run when the US button on the app was pressed. This indicates that the condition of distance < 20 * cm is
-    always reading true for some reason. What can be tried is an incrementing variable, and when the incrementing variable
-    gets larger than a certain value and the button is held down, trigger US
 
-  */
-
-    // When the Red condition is met, the Green LED should turn off
-    stopped();
-    delay(1000);
-    backward();
-    delay(200);
-    stopped();
-    // startOver = 0;
-    delay(2000);
+  // When the Red condition is met, the Green LED should turn off
+  stopped();
+  delay(1000);
+  backward();
+  delay(200);
+  stopped();
+  // startOver = 0;
+  delay(2000);
 
 }
 
 void ultraSonicMaze() {
 
   if (distance < 10 * cm) {
-    
+
     if (nextStep == 1) {
       stopped();
       delay(1000 * 5);
@@ -363,8 +346,9 @@ void setup() {
 void loop() {
 
   ultraSonic();
-//  usTrig();  // should only be called in case 12
- // distanceSensor();
+  usTrig();  // should only be called in case 12
+  distanceSensor();
+
   delay(300); /* delay neeeded so the current data sent doesn't interrupt the last data sent and print something like "dist: 30cdist: 20cm:" instead of "dist: 20 cm" */
   /*
     if (Speed == 0 || (digitalRead(MotorLF) == LOW && digitalRead(MotorLB) == LOW && digitalRead(MotorRF) == LOW && digitalRead(MotorRB) == LOW) ) {
